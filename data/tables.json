@@ -1,0 +1,14 @@
+[
+    {
+        "id": "table1",
+        "name": "Loft Oak",
+        "price": 12900,
+        "image": "table1.jpg"
+    },
+    {
+        "id": "table2",
+        "name": "Industrial Black",
+        "price": 16300,
+        "image": "table2.jpg"
+    }
+]

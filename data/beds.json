@@ -1,0 +1,14 @@
+[
+    {
+        "id": "bed1",
+        "name": "SoftDream",
+        "price": 19000,
+        "image": "bed1.jpg"
+    },
+    {
+        "id": "bed2",
+        "name": "ModernWood",
+        "price": 22500,
+        "image": "bed2.jpg"
+    }
+]

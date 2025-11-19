@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyDesignFurniture — Дизайнерські меблі</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Шапка -->
+    <header class="site-header">
+        <div class="container header-inner">
+            <h1 class="logo">MyDesignFurniture</h1>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#" class="nav-link active" data-section="home">Головна</a></li>
+                    <li><a href="#" class="nav-link" data-section="catalog">Каталог</a></li>
+                    <li><a href="#" class="nav-link" data-section="blog">Блог</a></li>
+                    <li><a href="#" id="register-btn">Реєстрація</a></li>
+                    <li><a href="#" id="login-btn">Увійти</a></li>
+                    <li><a href="#" id="logout-btn" style="display:none;">Вийти</a></li>
+                    <li><a href="#" id="cart-btn">🛒 Кошик (<span id="cart-count">0</span>)</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Основний контент -->
+    <main id="content">
+        <!-- Герой-секція -->
+        <section class="hero">
+            <div class="slider">
+                <div class="slides">
+                    <div class="slide active">
+                        <img src="images/hero1.jpg" alt="Меблі у вітальні">
+                        <div class="slide-caption">
+                            <h2>Сучасні меблі для твого дому</h2>
+                            <p>Стиль. Комфорт. Надійність.</p>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <img src="images/hero2.jpg" alt="Дивани преміум-класу">
+                        <div class="slide-caption">
+                            <h2>Колекція диванів 2025</h2>
+                            <p>Знайди свій ідеальний комфорт.</p>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <img src="images/hero3.jpg" alt="Мінімалізм у дизайні">
+                        <div class="slide-caption">
+                            <h2>Мінімалізм і якість</h2>
+                            <p>Меблі, що надихають.</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="prev">&#10094;</button>
+                <button class="next">&#10095;</button>
+            </div>
+        </section>
+
+        <!-- Секція замовлень -->
+        <section class="orders" id="orders-section">
+            <div class="container">
+                <h2>Мої замовлення</h2>
+                <div id="orders-list"></div>
+            </div>
+        </section>
+        <!-- Каталог -->
+        <section id="catalog-section" style="display:none;">
+            <div class="container">
+                <h2>Каталог меблів</h2>
+                <div class="catalog-buttons">
+                    <button class="btn-cat" data-file="sofas.json">Дивани</button>
+                    <button class="btn-cat" data-file="beds.json">Ліжка</button>
+                    <button class="btn-cat" data-file="tables.json">Столи</button>
+                </div>
+                <div class="grid" id="product-grid"></div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Модальні вікна -->
+    <div id="cart-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Ваш кошик</h2>
+            <div id="cart-items"></div>
+            <div class="cart-total">
+                <p>Загальна сума: ₴<span id="cart-total">0</span></p>
+                <button id="checkout-btn" class="btn">Оформити замовлення</button>
+            </div>
+            <div id="checkout-form" style="display:none; margin-top:15px;">
+                <h3>Оформлення замовлення</h3>
+                <form id="order-form">
+                    <label>Номер телефону:<br>
+                        <input type="tel" name="phone" placeholder="+380XXXXXXXXX" required>
+                    </label><br>
+                    <label>Відділення Нової пошти:<br>
+                        <input type="text" name="np" placeholder="№ відділення або адреса" required>
+                    </label><br>
+                    <label>Оплата:<br>
+                        <select name="payment" required>
+                            <option value="cod">При отриманні</option>
+                            <option value="online">Онлайн</option>
+                        </select>
+                    </label><br><br>
+                    <button type="submit" class="btn">Підтвердити замовлення</button>
+                </form>
+                <p id="order-msg"></p>
+            </div>
+        </div>
+    </div>
+
+    <div id="auth-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <div id="auth-content"></div>
+        </div>
+    </div>
+
+    <!-- Футер -->
+    <footer class="site-footer">
+        <div class="container">
+            <p>📞 Телефон: <a href="tel:+380961234567">+38 (096) 123-45-67</a></p>
+            <p>✉️ Email: <a href="mailto:info@mydesignfurniture.ua">info@mydesignfurniture.ua</a></p>
+            <div class="socials">
+                <a href="#">Instagram</a> |
+                <a href="#">Facebook</a>
+            </div>
+            <p>© 2025 MyDesignFurniture. Всі права захищено.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
