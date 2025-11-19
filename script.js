@@ -305,7 +305,7 @@ function openLoginModal(message = "") {
     const password = form.password.value.trim();
 
     try {
-      const res = await fetch("https://artemshop-backend.onrender.com/api/auth/login", {
+      const res = await fetch("http://artemshop-backend.onrender.com/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password })
