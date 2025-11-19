@@ -47,7 +47,7 @@ document.querySelectorAll(".nav-link").forEach(link => {
     if (section === "catalog") {
       showCatalog();
     } else if (section === "blog") {
-      loadBlog();  // <- тепер блог повинен показатись
+      loadBlog();
     } else if (section === "home") {
       location.reload();
     }
@@ -61,9 +61,9 @@ function showCatalog() {
 
   document.querySelectorAll(".btn-cat").forEach(btn => {
     btn.addEventListener("click", async () => {
-      const file = btn.dataset.file;
+      const category = btn.dataset.category;
       try {
-        const res = await fetch(`data/${file}`);
+        const res = await fetch(`https://artemshop-backend.onrender.com/api/products?category=${category}`);
         const data = await res.json();
         renderProducts(data);
       } catch {
@@ -91,9 +91,7 @@ function renderProducts(products) {
     productGrid.appendChild(div);
   });
 
-  document.querySelectorAll(".add-to-cart").forEach(btn =>
-    btn.addEventListener("click", addToCart)
-  );
+  document.querySelectorAll(".add-to-cart").forEach(btn => btn.addEventListener("click", addToCart));
 }
 
 // ---------------- КОШИК ---------------- //
@@ -151,9 +149,7 @@ function updateCartView() {
     });
   }
   cartTotal.textContent = total;
-  document.querySelectorAll(".remove-btn").forEach(btn =>
-    btn.addEventListener("click", removeFromCart)
-  );
+  document.querySelectorAll(".remove-btn").forEach(btn => btn.addEventListener("click", removeFromCart));
 }
 
 function removeFromCart(e) {
@@ -176,7 +172,6 @@ checkoutBtn.addEventListener("click", () => {
   const form = document.getElementById("order-form");
   const msg = document.getElementById("order-msg");
 
-  // Видаляємо старі слухачі, щоб не додавати декілька разів
   form.replaceWith(form.cloneNode(true));
   const newForm = document.getElementById("order-form");
 
@@ -214,12 +209,10 @@ checkoutBtn.addEventListener("click", () => {
       msg.textContent = "✅ Замовлення успішно оформлено!";
       msg.style.color = "green";
 
-      // Очищуємо кошик
       cart = [];
       saveCart();
       updateCartView();
 
-      // Закриваємо форму та модальне вікно через 1 сек
       setTimeout(() => {
         checkoutForm.style.display = "none";
         cartModal.style.display = "none";
@@ -305,7 +298,7 @@ function openLoginModal(message = "") {
     const password = form.password.value.trim();
 
     try {
-      const res = await fetch("http://artemshop-backend.onrender.com/api/auth/login", {
+      const res = await fetch("https://artemshop-backend.onrender.com/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password })
@@ -335,11 +328,9 @@ function updateAuthButtons() {
     logoutBtn.style.display = "none";
   }
 }
-function loadBlog() {
-  // Приховуємо каталог
-  catalogSection.style.display = "none";
 
-  // Вставляємо блог у контейнер
+function loadBlog() {
+  catalogSection.style.display = "none";
   const content = document.getElementById("content");
   content.innerHTML = `
     <section class="blog">
