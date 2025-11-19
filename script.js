@@ -33,7 +33,6 @@ const logoutBtn = document.getElementById("logout-btn");
 
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 let user = JSON.parse(sessionStorage.getItem("user")) || null;
-
 updateCartCount();
 updateAuthButtons();
 
@@ -45,9 +44,13 @@ document.querySelectorAll(".nav-link").forEach(link => {
     link.classList.add("active");
 
     const section = link.dataset.section;
-    if (section === "catalog") showCatalog();
-    else if (section === "blog") loadBlog();
-    else if (section === "home") location.reload();
+    if (section === "catalog") {
+      showCatalog();
+    } else if (section === "blog") {
+      loadBlog();  // <- тепер блог повинен показатись
+    } else if (section === "home") {
+      location.reload();
+    }
   });
 });
 
@@ -58,9 +61,9 @@ function showCatalog() {
 
   document.querySelectorAll(".btn-cat").forEach(btn => {
     btn.addEventListener("click", async () => {
-      const category = btn.dataset.category;
+      const file = btn.dataset.file;
       try {
-        const res = await fetch(`https://artemshop-backend.onrender.com/api/products?category=${category}`);
+        const res = await fetch(`data/${file}`);
         const data = await res.json();
         renderProducts(data);
       } catch {
@@ -88,7 +91,9 @@ function renderProducts(products) {
     productGrid.appendChild(div);
   });
 
-  document.querySelectorAll(".add-to-cart").forEach(btn => btn.addEventListener("click", addToCart));
+  document.querySelectorAll(".add-to-cart").forEach(btn =>
+    btn.addEventListener("click", addToCart)
+  );
 }
 
 // ---------------- КОШИК ---------------- //
@@ -146,7 +151,9 @@ function updateCartView() {
     });
   }
   cartTotal.textContent = total;
-  document.querySelectorAll(".remove-btn").forEach(btn => btn.addEventListener("click", removeFromCart));
+  document.querySelectorAll(".remove-btn").forEach(btn =>
+    btn.addEventListener("click", removeFromCart)
+  );
 }
 
 function removeFromCart(e) {
@@ -159,9 +166,7 @@ function removeFromCart(e) {
 // ---------------- ОФОРМЛЕННЯ ЗАМОВЛЕННЯ ---------------- //
 checkoutBtn.addEventListener("click", () => {
   if (!user) {
-    openLoginModal("Для оформлення замовлення увійдіть або зареєструйтесь", () => {
-      checkoutBtn.click(); // після логіну одразу відкриваємо форму
-    });
+    openLoginModal("Для оформлення замовлення увійдіть або зареєструйтесь");
     return;
   }
 
@@ -171,6 +176,7 @@ checkoutBtn.addEventListener("click", () => {
   const form = document.getElementById("order-form");
   const msg = document.getElementById("order-msg");
 
+  // Видаляємо старі слухачі, щоб не додавати декілька разів
   form.replaceWith(form.cloneNode(true));
   const newForm = document.getElementById("order-form");
 
@@ -196,7 +202,7 @@ checkoutBtn.addEventListener("click", () => {
         paymentType: payment
       };
 
-      const res = await fetch("https://artemshop-backend.onrender.com/api/order", {
+      const res = await fetch("http://localhost:5000/api/order", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(order)
@@ -208,10 +214,12 @@ checkoutBtn.addEventListener("click", () => {
       msg.textContent = "✅ Замовлення успішно оформлено!";
       msg.style.color = "green";
 
+      // Очищуємо кошик
       cart = [];
       saveCart();
       updateCartView();
 
+      // Закриваємо форму та модальне вікно через 1 сек
       setTimeout(() => {
         checkoutForm.style.display = "none";
         cartModal.style.display = "none";
@@ -258,7 +266,7 @@ function openRegisterModal() {
     const password = form.password.value.trim();
 
     try {
-      const res = await fetch("https://artemshop-backend.onrender.com/api/auth/register", {
+      const res = await fetch("http://localhost:5000/api/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, password })
@@ -275,7 +283,7 @@ function openRegisterModal() {
   });
 }
 
-function openLoginModal(message = "", callback = null) {
+function openLoginModal(message = "") {
   authModal.style.display = "block";
   authContent.innerHTML = `
     <h2>Вхід</h2>
@@ -297,7 +305,7 @@ function openLoginModal(message = "", callback = null) {
     const password = form.password.value.trim();
 
     try {
-      const res = await fetch("https://artemshop-backend.onrender.com/api/auth/login", {
+      const res = await fetch("http://localhost:5000/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password })
@@ -309,9 +317,6 @@ function openLoginModal(message = "", callback = null) {
       user = data.user;
       updateAuthButtons();
       authModal.style.display = "none";
-
-      if (callback) callback();
-
     } catch (err) {
       msg.textContent = err.message || "❌ Помилка входу";
       msg.style.color = "red";
@@ -330,9 +335,11 @@ function updateAuthButtons() {
     logoutBtn.style.display = "none";
   }
 }
-
 function loadBlog() {
+  // Приховуємо каталог
   catalogSection.style.display = "none";
+
+  // Вставляємо блог у контейнер
   const content = document.getElementById("content");
   content.innerHTML = `
     <section class="blog">
