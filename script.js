@@ -202,7 +202,7 @@ checkoutBtn.addEventListener("click", () => {
         paymentType: payment
       };
 
-      const res = await fetch("http://localhost:5000/api/order", {
+      const res = await fetch("https://artemshop-backend.onrender.com/api/order", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(order)
@@ -266,7 +266,7 @@ function openRegisterModal() {
     const password = form.password.value.trim();
 
     try {
-      const res = await fetch("http://localhost:5000/api/auth/register", {
+      const res = await fetch("https://artemshop-backend.onrender.com/api/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, password })
@@ -305,7 +305,7 @@ function openLoginModal(message = "") {
     const password = form.password.value.trim();
 
     try {
-      const res = await fetch("http://localhost:5000/api/auth/login", {
+      const res = await fetch("https://artemshop-backend.onrender.com/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password })
