@@ -33,6 +33,7 @@ const logoutBtn = document.getElementById("logout-btn");
 
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 let user = JSON.parse(sessionStorage.getItem("user")) || null;
+
 updateCartCount();
 updateAuthButtons();
 
@@ -44,13 +45,9 @@ document.querySelectorAll(".nav-link").forEach(link => {
     link.classList.add("active");
 
     const section = link.dataset.section;
-    if (section === "catalog") {
-      showCatalog();
-    } else if (section === "blog") {
-      loadBlog();
-    } else if (section === "home") {
-      location.reload();
-    }
+    if (section === "catalog") showCatalog();
+    else if (section === "blog") loadBlog();
+    else if (section === "home") location.reload();
   });
 });
 
@@ -162,7 +159,9 @@ function removeFromCart(e) {
 // ---------------- ОФОРМЛЕННЯ ЗАМОВЛЕННЯ ---------------- //
 checkoutBtn.addEventListener("click", () => {
   if (!user) {
-    openLoginModal("Для оформлення замовлення увійдіть або зареєструйтесь");
+    openLoginModal("Для оформлення замовлення увійдіть або зареєструйтесь", () => {
+      checkoutBtn.click(); // після логіну одразу відкриваємо форму
+    });
     return;
   }
 
@@ -276,7 +275,7 @@ function openRegisterModal() {
   });
 }
 
-function openLoginModal(message = "") {
+function openLoginModal(message = "", callback = null) {
   authModal.style.display = "block";
   authContent.innerHTML = `
     <h2>Вхід</h2>
@@ -310,6 +309,9 @@ function openLoginModal(message = "") {
       user = data.user;
       updateAuthButtons();
       authModal.style.display = "none";
+
+      if (callback) callback();
+
     } catch (err) {
       msg.textContent = err.message || "❌ Помилка входу";
       msg.style.color = "red";
