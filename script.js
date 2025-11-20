@@ -40,6 +40,7 @@ updateAuthButtons();
 // ---------------- БАЗОВИЙ URL API ---------------- //
 const API_BASE = window.API_BASE || "https://artemShop-backend.onrender.com/api";
 
+
 // ---------------- НАВІГАЦІЯ ---------------- //
 document.querySelectorAll(".nav-link").forEach(link => {
   link.addEventListener("click", (e) => {
@@ -232,8 +233,8 @@ checkoutBtn.addEventListener("click", () => {
 });
 
 // ---------------- АВТОРИЗАЦІЯ ---------------- //
-registerBtn.addEventListener("click", () => openRegisterModal());
-loginBtn.addEventListener("click", () => openLoginModal());
+registerBtn.addEventListener("click", openRegisterModal);
+loginBtn.addEventListener("click", openLoginModal);
 logoutBtn.addEventListener("click", () => {
   sessionStorage.removeItem("user");
   user = null;
@@ -256,7 +257,6 @@ function openRegisterModal() {
   const form = document.getElementById("register-form");
   const msg = document.getElementById("auth-msg");
 
-  // Заміна старого слухача
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
     const name = form.name.value.trim();
@@ -270,13 +270,16 @@ function openRegisterModal() {
         body: JSON.stringify({ name, email, password })
       });
 
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.message || "Помилка");
+      if (!res.ok) {
+        const errData = await res.json().catch(() => ({}));
+        throw new Error(errData.message || "Помилка сервера");
+      }
 
       msg.textContent = "✅ Реєстрація успішна! Тепер увійдіть.";
       msg.style.color = "green";
 
-      setTimeout(() => authModal.style.display = "none", 1000);
+      // Автоматично відкриваємо вхід після реєстрації через 1 сек
+      setTimeout(() => openLoginModal(), 1000);
 
     } catch (err) {
       msg.textContent = err.message || "❌ Помилка реєстрації";
@@ -313,14 +316,16 @@ function openLoginModal(message = "") {
         body: JSON.stringify({ email, password })
       });
 
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.message || "Помилка");
+      if (!res.ok) {
+        const errData = await res.json().catch(() => ({}));
+        throw new Error(errData.message || "Помилка сервера");
+      }
 
+      const data = await res.json();
       sessionStorage.setItem("user", JSON.stringify(data.user));
       user = data.user;
       updateAuthButtons();
-      authModal.style.display = "none";
-
+      authModal.style.display = "none"; // Закриваємо модальне вікно
     } catch (err) {
       msg.textContent = err.message || "❌ Помилка входу";
       msg.style.color = "red";
@@ -339,6 +344,7 @@ function updateAuthButtons() {
     logoutBtn.style.display = "none";
   }
 }
+
 
 function loadBlog() {
   catalogSection.style.display = "none";
