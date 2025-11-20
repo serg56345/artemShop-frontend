@@ -36,6 +36,9 @@ let user = JSON.parse(sessionStorage.getItem("user")) || null;
 updateCartCount();
 updateAuthButtons();
 
+// ---------------- БАЗОВИЙ URL API ---------------- //
+const API_BASE = "https://artemShop-backend.onrender.com/api";
+
 // ---------------- НАВІГАЦІЯ ---------------- //
 document.querySelectorAll(".nav-link").forEach(link => {
   link.addEventListener("click", (e) => {
@@ -44,13 +47,9 @@ document.querySelectorAll(".nav-link").forEach(link => {
     link.classList.add("active");
 
     const section = link.dataset.section;
-    if (section === "catalog") {
-      showCatalog();
-    } else if (section === "blog") {
-      loadBlog();  // <- тепер блог повинен показатись
-    } else if (section === "home") {
-      location.reload();
-    }
+    if (section === "catalog") showCatalog();
+    else if (section === "blog") loadBlog();
+    else if (section === "home") location.reload();
   });
 });
 
@@ -176,7 +175,6 @@ checkoutBtn.addEventListener("click", () => {
   const form = document.getElementById("order-form");
   const msg = document.getElementById("order-msg");
 
-  // Видаляємо старі слухачі, щоб не додавати декілька разів
   form.replaceWith(form.cloneNode(true));
   const newForm = document.getElementById("order-form");
 
@@ -202,7 +200,7 @@ checkoutBtn.addEventListener("click", () => {
         paymentType: payment
       };
 
-      const res = await fetch("http://localhost:5000/api/order", {
+      const res = await fetch(`${API_BASE}/order`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(order)
@@ -214,12 +212,10 @@ checkoutBtn.addEventListener("click", () => {
       msg.textContent = "✅ Замовлення успішно оформлено!";
       msg.style.color = "green";
 
-      // Очищуємо кошик
       cart = [];
       saveCart();
       updateCartView();
 
-      // Закриваємо форму та модальне вікно через 1 сек
       setTimeout(() => {
         checkoutForm.style.display = "none";
         cartModal.style.display = "none";
@@ -266,7 +262,7 @@ function openRegisterModal() {
     const password = form.password.value.trim();
 
     try {
-      const res = await fetch("http://localhost:5000/api/auth/register", {
+      const res = await fetch(`${API_BASE}/auth/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, password })
@@ -305,7 +301,7 @@ function openLoginModal(message = "") {
     const password = form.password.value.trim();
 
     try {
-      const res = await fetch("http://localhost:5000/api/auth/login", {
+      const res = await fetch(`${API_BASE}/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password })
@@ -335,11 +331,9 @@ function updateAuthButtons() {
     logoutBtn.style.display = "none";
   }
 }
-function loadBlog() {
-  // Приховуємо каталог
-  catalogSection.style.display = "none";
 
-  // Вставляємо блог у контейнер
+function loadBlog() {
+  catalogSection.style.display = "none";
   const content = document.getElementById("content");
   content.innerHTML = `
     <section class="blog">
