@@ -33,6 +33,7 @@ const logoutBtn = document.getElementById("logout-btn");
 
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 let user = JSON.parse(sessionStorage.getItem("user")) || null;
+
 updateCartCount();
 updateAuthButtons();
 
@@ -255,6 +256,7 @@ function openRegisterModal() {
   const form = document.getElementById("register-form");
   const msg = document.getElementById("auth-msg");
 
+  // Заміна старого слухача
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
     const name = form.name.value.trim();
@@ -267,11 +269,15 @@ function openRegisterModal() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, password })
       });
+
       const data = await res.json();
-      if (!res.ok) throw new Error(data.message);
+      if (!res.ok) throw new Error(data.message || "Помилка");
 
       msg.textContent = "✅ Реєстрація успішна! Тепер увійдіть.";
       msg.style.color = "green";
+
+      setTimeout(() => authModal.style.display = "none", 1000);
+
     } catch (err) {
       msg.textContent = err.message || "❌ Помилка реєстрації";
       msg.style.color = "red";
@@ -306,13 +312,15 @@ function openLoginModal(message = "") {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password })
       });
+
       const data = await res.json();
-      if (!res.ok) throw new Error(data.message);
+      if (!res.ok) throw new Error(data.message || "Помилка");
 
       sessionStorage.setItem("user", JSON.stringify(data.user));
       user = data.user;
       updateAuthButtons();
       authModal.style.display = "none";
+
     } catch (err) {
       msg.textContent = err.message || "❌ Помилка входу";
       msg.style.color = "red";
@@ -348,5 +356,4 @@ function loadBlog() {
     </section>
   `;
 }
-
 
