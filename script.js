@@ -37,7 +37,7 @@ updateCartCount();
 updateAuthButtons();
 
 // ---------------- БАЗОВИЙ URL API ---------------- //
-const API_BASE = "https://artemShop-backend.onrender.com/api";
+const API_BASE = window.API_BASE || "https://artemShop-backend.onrender.com/api";
 
 // ---------------- НАВІГАЦІЯ ---------------- //
 document.querySelectorAll(".nav-link").forEach(link => {
