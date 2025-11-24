@@ -18,6 +18,7 @@ if (prevBtn && nextBtn) {
   setInterval(() => showSlide(slideIndex + 1), 5000);
 }
 
+
 // ---------------- ГЛОБАЛЬНІ ЗМІННІ ---------------- //
 const catalogSection = document.getElementById("catalog-section");
 const productGrid = document.getElementById("product-grid");
