@@ -106,7 +106,7 @@ async function loadCategoryCards() {
   container.innerHTML = "";
 
   categories.forEach(cat => {
-      const card = `
+    const card = `
           <div class="category-card">
               <div class="category__picture">
                   <img src="${cat.img}" alt="${cat.title}">
@@ -118,7 +118,7 @@ async function loadCategoryCards() {
               </div>
           </div>
       `;
-      container.innerHTML += card;
+    container.innerHTML += card;
   });
 }
 
