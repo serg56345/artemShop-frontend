@@ -97,6 +97,28 @@ function renderProducts(products) {
     btn.addEventListener("click", addToCart)
   );
 }
+//-------Картки-------//
+async function loadProducts() {
+  const response = await fetch('data/products.json');
+  const products = await response.json();
+
+  const container = document.getElementById('product-list');
+  container.innerHTML = "";
+
+  products.forEach(product => {
+    const card = `
+      <div class="card">
+        <img src="${product.image}" alt="${product.title}">
+        <h3>${product.title}</h3>
+        <p>${product.price} грн</p>
+      </div>
+    `;
+    container.innerHTML += card;
+  });
+}
+
+loadProducts();
+
 
 // ---------------- КОШИК ---------------- //
 cartBtn.addEventListener("click", () => {

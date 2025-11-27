@@ -1,0 +1,14 @@
+[
+    {
+        "id": 1,
+        "title": "Диван Modern",
+        "image": "images/sofa1.jpg",
+        "price": 12000
+    },
+    {
+        "id": 2,
+        "title": "Крісло Comfort",
+        "image": "images/hero1.jpg",
+        "price": 4500
+    }
+]
