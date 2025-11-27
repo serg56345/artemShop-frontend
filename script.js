@@ -55,6 +55,13 @@ document.querySelectorAll(".nav-link").forEach(link => {
     else if (section === "home") location.reload();
   });
 });
+//------ мобільна навігація------///
+const menuToggle = document.querySelector('.menu-toggle');
+const mainNav = document.querySelector('.main-nav');
+
+menuToggle.addEventListener('click', () => {
+  mainNav.classList.toggle('active');
+});
 
 // ---------------- КАТАЛОГ ---------------- //
 function showCatalog() {
