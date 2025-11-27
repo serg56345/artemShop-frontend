@@ -173,7 +173,7 @@ body {
     position: relative;
     overflow: hidden;
     border-radius: 20px;
-    height: 300px;
+    height: 350px;
 }
 
 .category__picture img {
@@ -206,18 +206,46 @@ body {
 
 .category__content {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    left: 50%;
+    bottom: 15px;
+    /* розташування внизу картинки */
+    transform: translateX(-50%);
+    /* центруємо по горизонталі */
     display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
+    /* текст і кнопка в рядок */
+    gap: 10px;
+    /* відстань між елементами в рядку */
+    padding: 8px 16px;
+    background: rgba(45, 45, 45, 0.5);
+    /* напівпрозорий фон */
+    border-radius: 25px;
+    /* заокруглені краї */
     color: #fff;
     z-index: 2;
-    text-align: center;
-    padding: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;
+    /* текст не переноситься на новий рядок */
+}
+
+.category__content span {
+    font-weight: bold;
+}
+
+.category-card__btn {
+    background: #fff;
+    color: #000;
+    border: none;
+    padding: 5px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background 0.3s;
+}
+
+.category-card__btn:hover {
+    background: #ddd;
 }
 
 .category-card__title {
