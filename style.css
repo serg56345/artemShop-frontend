@@ -10,7 +10,8 @@ body {
     color: #fff;
 }
 
-label {
+label,
+p {
     color: black;
 }
 
@@ -389,6 +390,11 @@ label {
     border-radius: 4px;
     object-fit: cover;
     margin-right: 10px;
+}
+
+
+.cart-total {
+    color: #000;
 }
 
 .remove-btn {
