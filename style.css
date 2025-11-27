@@ -155,79 +155,107 @@ body {
     color: #fff;
 }
 
-/* --- Адаптивність --- */
-@media (max-width: 768px) {
-    .main-nav ul {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .slide-caption h2 {
-        font-size: 1.8rem;
-    }
-
-    .slide-caption p {
-        font-size: 1rem;
-    }
-}
-
-/* ---- КАТАЛОГ ---- */
-.catalog {
-    padding: 60px 0;
-}
-
-.catalog h2 {
-    text-align: center;
-    margin-bottom: 40px;
-}
-
-.grid {
+/*-----Категорії-----*/
+.category__products {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 25px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
 }
 
-.card {
-    background: #fff;
-    border-radius: 6px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+.category-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.category__picture {
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+    height: 300px;
+}
+
+.category__picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+    display: block;
+}
+
+.category__picture::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+    transition: 0.3s ease-in-out;
+}
+
+.category__picture:hover::after {
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.category__picture:hover img {
+    transform: scale(1.2);
+}
+
+.category__content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    z-index: 2;
     text-align: center;
     padding: 20px;
-    transition: transform 0.3s ease;
 }
 
-.card:hover {
-    transform: translateY(-5px);
-}
-
-.card img {
-    width: 100%;
-    border-radius: 6px;
+.category-card__title {
+    font-size: 24px;
     margin-bottom: 10px;
 }
 
-.card h4 {
-    margin-bottom: 8px;
-}
-
-.card p {
-    color: #555;
+.category-card__text {
+    font-size: 16px;
     margin-bottom: 15px;
 }
 
-.card .btn {
-    background: #000;
-    color: #fff;
-    border: none;
-    padding: 10px 16px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: 0.3s;
+.category-card__text span {
+    font-weight: bold;
 }
 
-.card .btn:hover {
-    background: #333;
+.category-card__btn {
+    background: #fff;
+    color: #000;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: background 0.3s;
 }
+
+.category-card__btn:hover {
+    background: #ddd;
+}
+
+/* Адаптивність */
+@media (max-width: 768px) {
+    .category__products {
+        grid-template-columns: 1fr;
+    }
+}
+
 
 /* ---- МОДАЛЬНЕ ВІКНО КОШИКА ---- */
 .modal {

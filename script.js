@@ -97,6 +97,34 @@ function renderProducts(products) {
     btn.addEventListener("click", addToCart)
   );
 }
+//-------Категорії-------//
+async function loadCategoryCards() {
+  const response = await fetch('data/category.json');
+  const categories = await response.json();
+
+  const container = document.getElementById('category-list');
+  container.innerHTML = "";
+
+  categories.forEach(cat => {
+      const card = `
+          <div class="category-card">
+              <div class="category__picture">
+                  <img src="${cat.img}" alt="${cat.title}">
+                  <div class="category__content">
+                      <h3 class="category-card__title">${cat.title}</h3>
+                      <p class="category-card__text">${cat.p} <span>${cat.pp}</span></p>
+                      <button class="category-card__btn">${cat.span}</button>
+                  </div>
+              </div>
+          </div>
+      `;
+      container.innerHTML += card;
+  });
+}
+
+loadCategoryCards();
+
+
 //-------Картки-------//
 async function loadProducts() {
   const response = await fetch('data/products.json');
