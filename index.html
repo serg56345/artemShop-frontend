@@ -32,34 +32,37 @@
 
     <!-- Основний контент -->
     <main id="content">
+
         <!-- Герой-секція -->
         <section class="hero">
-            <div class="slider">
-                <div class="slides">
-                    <div class="slide active">
-                        <img src="images/hero1.jpg" alt="Меблі у вітальні">
-                        <div class="slide-caption">
-                            <h2>Сучасні меблі для твого дому</h2>
-                            <p>Стиль. Комфорт. Надійність.</p>
+            <div class="container">
+                <div class="slider">
+                    <div class="slides">
+                        <div class="slide active">
+                            <img src="images/hero1.jpg" alt="Меблі у вітальні">
+                            <div class="slide-caption">
+                                <h2>Сучасні меблі для твого дому</h2>
+                                <p>Стиль. Комфорт. Надійність.</p>
+                            </div>
+                        </div>
+                        <div class="slide">
+                            <img src="images/hero2.jpg" alt="Дивани преміум-класу">
+                            <div class="slide-caption">
+                                <h2>Колекція диванів 2025</h2>
+                                <p>Знайди свій ідеальний комфорт.</p>
+                            </div>
+                        </div>
+                        <div class="slide">
+                            <img src="images/hero3.jpg" alt="Мінімалізм у дизайні">
+                            <div class="slide-caption">
+                                <h2>Мінімалізм і якість</h2>
+                                <p>Меблі, що надихають.</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="slide">
-                        <img src="images/hero2.jpg" alt="Дивани преміум-класу">
-                        <div class="slide-caption">
-                            <h2>Колекція диванів 2025</h2>
-                            <p>Знайди свій ідеальний комфорт.</p>
-                        </div>
-                    </div>
-                    <div class="slide">
-                        <img src="images/hero3.jpg" alt="Мінімалізм у дизайні">
-                        <div class="slide-caption">
-                            <h2>Мінімалізм і якість</h2>
-                            <p>Меблі, що надихають.</p>
-                        </div>
-                    </div>
+                    <button class="prev">&#10094;</button>
+                    <button class="next">&#10095;</button>
                 </div>
-                <button class="prev">&#10094;</button>
-                <button class="next">&#10095;</button>
             </div>
         </section>
 
@@ -70,38 +73,33 @@
                 <div id="orders-list"></div>
             </div>
         </section>
-        <!-- Каталог -->
+        <!-- Каталог меблів -->
         <section id="catalog-section" style="display:none;">
             <div class="container">
                 <h2>Каталог меблів</h2>
+
+                <!-- Кнопки категорій -->
                 <div class="catalog-buttons">
                     <button class="btn-cat" data-file="sofas.json">Дивани</button>
                     <button class="btn-cat" data-file="beds.json">Ліжка</button>
                     <button class="btn-cat" data-file="tables.json">Столи</button>
                 </div>
+
+                <!-- Контейнер для продуктів (для JS) -->
                 <div class="grid" id="product-grid"></div>
             </div>
         </section>
 
 
-        <!--Категорії-->
+        <!-- Категорії -->
         <section class="category">
             <div class="container">
                 <h2 class="category__title title">Категорії</h2>
                 <div class="category__products" id="category-list">
-                    <!-- карточки будуть додаватися сюди через JS -->
+                    <!-- карточки будуть додаватися через JS -->
                 </div>
             </div>
         </section>
-
-        <!--Картки-->
-        <section id="catalog-section">
-            <div class="container">
-                <h2>Каталог меблів</h2>
-                <div id="product-list" class="product-list"></div>
-            </div>
-        </section>
-
 
     </main>
 
@@ -155,7 +153,6 @@
             </div>
             <p>© 2025 MyDesignFurniture. Всі права захищено.</p>
         </div>
-
     </footer>
 
     <script src="script.js"></script>
