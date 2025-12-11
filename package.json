@@ -1,5 +1,11 @@
 {
     "name": "frontend",
     "version": "1.0.0",
-    "description": "Frontend for artemShop project"
+    "description": "Frontend for artemShop project",
+    "dependencies": {
+        "serve": "^14.2.5"
+    },
+    "scripts": {
+        "start": "serve -s . -l $PORT"
+    }
 }
