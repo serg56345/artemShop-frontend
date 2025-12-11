@@ -1,14 +1,73 @@
 [
     {
         "id": 1,
-        "title": "Диван Modern",
-        "image": "images/sofa1.jpg",
-        "price": 12000
+        "category": "sofa",
+        "title": "Диван Комфорт",
+        "description": "Зручний та стильний диван для вашої вітальні",
+        "price": 12000,
+        "img": "images/sofa/sofa1.jpg"
     },
     {
-        "id": 2,
-        "title": "Крісло Comfort",
-        "image": "images/hero1.jpg",
-        "price": 4500
+        "id": 6,
+        "category": "sofa",
+        "title": "Диван Комфорт",
+        "description": "Зручний та стильний диван для вашої вітальні",
+        "price": 12000,
+        "img": "images/sofa/sofa 2.jpg"
+    },
+    {
+        "id": 7,
+        "category": "sofa",
+        "title": "Диван Комфорт",
+        "description": "Зручний та стильний диван для вашої вітальні",
+        "price": 12000,
+        "img": "images/sofa/sofa 3.jpg"
+    },
+    {
+        "id": 3,
+        "category": "bed",
+        "title": "Ліжко Сонечко",
+        "description": "Комфортне двоспальне ліжко",
+        "price": 15000,
+        "img": "images/products/bed1.jpg"
+    },
+    {
+        "id": 4,
+        "category": "chair",
+        "title": "Стілець Ергономік",
+        "description": "Зручний стілець для офісу",
+        "price": 3500,
+        "img": "images/chairs/chair-01.png"
+    },
+    {
+        "id": 8,
+        "category": "chair",
+        "title": "Стілець Ергономік",
+        "description": "Зручний стілець для офісу",
+        "price": 3500,
+        "img": "images/chairs/chair-02.png"
+    },
+    {
+        "id": 9,
+        "category": "chair",
+        "title": "Стілець Ергономік",
+        "description": "Зручний стілець для офісу",
+        "price": 3500,
+        "img": "images/chairs/chair-03.png"
+    },
+    {
+        "id": 10,
+        "category": "chair",
+        "title": "Стілець Ергономік",
+        "description": "Зручний стілець для офісу",
+        "price": 3500,
+        "img": "images/chairs/chair-04.png"
+    },
+    {
+        "id": 5,
+        "category": "armchair",
+        "description": "Зручне крісло для дому",
+        "price": 4500,
+        "img": "images/products/armchair1.jpg"
     }
 ]

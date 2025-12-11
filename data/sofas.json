@@ -1,21 +1,20 @@
 [
-    {
-      "id": "sofa1",
-      "name": "Loft Classic",
-      "price": 14500,
-      "image": "sofa1.jpg"
-    },
-    {
-      "id": "sofa2",
-      "name": "Minimal Grey",
-      "price": 18200,
-      "image": "sofa2.jpg"
-    },
-    {
-      "id": "sofa3",
-      "name": "Comfort+",
-      "price": 21900,
-      "image": "sofa3.jpg"
-    }
-  ]
-  
+  {
+    "id": "sofa1",
+    "name": "Loft Classic",
+    "price": 14500,
+    "image": "sofa1.jpg"
+  },
+  {
+    "id": "sofa2",
+    "name": "Minimal Grey",
+    "price": 18200,
+    "image": "sofa 2.jpg"
+  },
+  {
+    "id": "sofa3",
+    "name": "Comfort+",
+    "price": 21900,
+    "image": "sofa 3.jpg"
+  }
+]

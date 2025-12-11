@@ -43,18 +43,47 @@ const API_BASE = "https://artemshop-backend.onrender.com/api";
 
 
 // ---------------- НАВІГАЦІЯ ---------------- //
+//document.querySelectorAll(".nav-link").forEach(link => {
+//link.addEventListener("click", (e) => {
+//e.preventDefault();
+//document.querySelectorAll(".nav-link").forEach(l => l.classList.remove("active"));
+//link.classList.add("active");
+
+//const section = link.dataset.section;
+//if (section === "catalog") showCatalog();
+//else if (section === "blog") loadBlog();
+//else if (section === "home") location.reload();
+//});
+//});
+//document.querySelectorAll(".nav-link").forEach(link => {
+//link.addEventListener("click", (e) => {
+//const section = link.dataset.section;
+//if (section === "catalog") {
+// e.preventDefault();
+//showCatalog(); // перехід на category.html
+//} else if (section === "blog") {
+//e.preventDefault();
+//loadBlog();
+//}
+// інші посилання, які ведуть на інші сторінки, залишаються звичайними
+//});
+//});
+// script.js — обробка кліків по меню
 document.querySelectorAll(".nav-link").forEach(link => {
   link.addEventListener("click", (e) => {
-    e.preventDefault();
-    document.querySelectorAll(".nav-link").forEach(l => l.classList.remove("active"));
-    link.classList.add("active");
-
     const section = link.dataset.section;
-    if (section === "catalog") showCatalog();
-    else if (section === "blog") loadBlog();
-    else if (section === "home") location.reload();
+
+    if (section === "catalog") {
+      e.preventDefault();
+      showCatalog(); // перенаправлення на category.html
+    } else if (section === "blog") {
+      e.preventDefault();
+      loadBlog(); // рендер блогу на поточній сторінці
+    }
+    // "Головна" веде на index.html через href, нічого додатково не робимо
   });
 });
+
 //------ мобільна навігація------///
 const menuToggle = document.querySelector('.menu-toggle');
 const mainNav = document.querySelector('.main-nav');
@@ -64,22 +93,25 @@ menuToggle.addEventListener('click', () => {
 });
 
 // ---------------- КАТАЛОГ ---------------- //
-function showCatalog() {
-  catalogSection.style.display = "block";
-  productGrid.innerHTML = "<p>Виберіть категорію меблів 👇</p>";
+//function showCatalog() {
+//catalogSection.style.display = "block";
+//productGrid.innerHTML = "<p>Виберіть категорію меблів 👇</p>";
 
-  document.querySelectorAll(".btn-cat").forEach(btn => {
-    btn.addEventListener("click", async () => {
-      const file = btn.dataset.file;
-      try {
-        const res = await fetch(`data/${file}`);
-        const data = await res.json();
-        renderProducts(data);
-      } catch {
-        productGrid.innerHTML = "<p>❌ Помилка завантаження каталогу</p>";
-      }
-    });
-  });
+// document.querySelectorAll(".btn-cat").forEach(btn => {
+//btn.addEventListener("click", async () => {
+//const file = btn.dataset.file;
+//try {
+// const res = await fetch(`data/${file}`);
+//const data = await res.json();
+// renderProducts(data);
+//} catch {
+//  productGrid.innerHTML = "<p>❌ Помилка завантаження каталогу</p>";
+// }
+// });
+// });
+//}
+function showCatalog() {
+  window.location.href = "category.html";
 }
 
 function renderProducts(products) {
@@ -114,7 +146,7 @@ async function loadCategoryCards() {
 
   categories.forEach(cat => {
     const card = `
-          <div class="category-card">
+          <div class="category-card" onclick="window.location.href='category.html?c=${cat.slug}'">
               <div class="category__picture">
                   <img src="${cat.img}" alt="${cat.title}">
                   <div class="category__content">
@@ -127,6 +159,7 @@ async function loadCategoryCards() {
       `;
     container.innerHTML += card;
   });
+
 }
 
 loadCategoryCards();
@@ -420,4 +453,3 @@ function loadBlog() {
     </section>
   `;
 }
-

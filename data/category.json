@@ -1,30 +1,42 @@
 [
     {
+        "id": 1,
         "img": "images/category/sofa.jpg",
         "title": "Дивани",
         "p": "Ідеальна формула",
         "pp": "затишку",
-        "span": "Перейти у каталог"
+        "span": "Перейти у каталог",
+        "slug": "sofa",
+        "price": 12000
     },
     {
+        "id": 2,
         "img": "images/category/bed.jpg",
         "title": "Ліжка",
         "p": "Ваш квиток у",
         "pp": "щасливі сни",
-        "span": "Перейти у каталог"
+        "span": "Перейти у каталог",
+        "slug": "bed",
+        "price": 12001
     },
     {
+        "id": 3,
         "img": "images/category/chair.jpg",
         "title": "Стільці",
         "p": "Будеш сидіти",
         "pp": "та мріяти",
-        "span": "Перейти у каталог"
+        "span": "Перейти у каталог",
+        "slug": "chair",
+        "price": 12002
     },
     {
+        "id": 4,
         "img": "images/category/armchair.jpg",
         "title": "Крісла",
         "p": "Стиль в кожному",
         "pp": "куточку вашого дому",
-        "span": "Перейти у каталог"
+        "span": "Перейти у каталог",
+        "slug": "armchair",
+        "price": 12003
     }
 ]

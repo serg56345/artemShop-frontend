@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MyFurniture</title>
+    <title>Категорія</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -16,6 +16,17 @@
             <!-- Гамбургер для мобільних -->
             <span class="menu-toggle">☰</span>
             <!-- Меню -->
+            <!--<nav class="main-nav">
+                <ul>
+                    <li><a href="/Frontend/index.html" class="nav-link active" data-section="home">Головна</a></li>
+                    <li><a href="#" class="nav-link" data-section="catalog">Каталог</a></li>
+                    <li><a href="#" class="nav-link" data-section="blog">Блог</a></li>
+                    <li><a href="#" id="register-btn">Реєстрація</a></li>
+                    <li><a href="#" id="login-btn">Увійти</a></li>
+                    <li><a href="#" id="logout-btn" style="display:none;">Вийти</a></li>
+                    <li><a href="#" id="cart-btn">🛒 Кошик (<span id="cart-count">0</span>)</a></li>
+                </ul>
+            </nav>-->
             <!-- Навігація -->
             <nav class="main-nav">
                 <ul>
@@ -28,94 +39,30 @@
                     <li><a href="#" id="cart-btn">🛒 Кошик (<span id="cart-count">0</span>)</a></li>
                 </ul>
             </nav>
-            <!-- <nav class="main-nav">
-                <ul>
-                    <li><a href="index.html" class="nav-link active" data-section="home">Головна</a></li>
-                    <li><a href="#" class="nav-link" data-section="catalog">Каталог</a></li>
-                    <li><a href="#" class="nav-link" data-section="blog">Блог</a></li>
-                    <li><a href="#" id="register-btn">Реєстрація</a></li>
-                    <li><a href="#" id="login-btn">Увійти</a></li>
-                    <li><a href="#" id="logout-btn" style="display:none;">Вийти</a></li>
-                    <li><a href="#" id="cart-btn">🛒 Кошик (<span id="cart-count">0</span>)</a></li>
-                </ul>
-            </nav>-->
         </div>
     </header>
 
-    <!-- Основний контент -->
-    <main id="content">
+    <section class="category-products">
+        <div class="container flex-container">
+            <!-- Сайдбар -->
+            <aside class="sidebar">
+                <h3>Категорії</h3>
+                <ul id="sidebar-categories">
+                    <!-- Категорії будуть додані через JS -->
+                </ul>
+            </aside>
 
-        <!-- Герой-секція -->
-        <section class="hero">
-            <div class="container">
-                <div class="slider">
-                    <div class="slides">
-                        <div class="slide active">
-                            <img src="images/hero1.jpg" alt="Меблі у вітальні">
-                            <div class="slide-caption">
-                                <h2>Сучасні меблі для твого дому</h2>
-                                <p>Стиль. Комфорт. Надійність.</p>
-                            </div>
-                        </div>
-                        <div class="slide">
-                            <img src="images/hero2.jpg" alt="Дивани преміум-класу">
-                            <div class="slide-caption">
-                                <h2>Колекція диванів 2025</h2>
-                                <p>Знайди свій ідеальний комфорт.</p>
-                            </div>
-                        </div>
-                        <div class="slide">
-                            <img src="images/hero3.jpg" alt="Мінімалізм у дизайні">
-                            <div class="slide-caption">
-                                <h2>Мінімалізм і якість</h2>
-                                <p>Меблі, що надихають.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="prev">&#10094;</button>
-                    <button class="next">&#10095;</button>
+            <!-- Основний блок карток -->
+            <div class="products-area">
+                <h2 id="category-title" class="title">Товари</h2>
+                <div id="product-list" class="product-list">
+                    <!-- Картки товарів -->
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Секція замовлень -->
-        <section class="orders" id="orders-section">
-            <div class="container">
-                <h2>Мої замовлення</h2>
-                <div id="orders-list"></div>
-            </div>
-        </section>
-        <!-- Каталог меблів -->
-        <section id="catalog-section" style="display:none;">
-            <div class="container">
-                <h2>Каталог меблів</h2>
-
-                <!-- Кнопки категорій -->
-                <div class="catalog-buttons">
-                    <button class="btn-cat" data-file="sofas.json">Дивани</button>
-                    <button class="btn-cat" data-file="beds.json">Ліжка</button>
-                    <button class="btn-cat" data-file="tables.json">Столи</button>
-                </div>
-
-                <!-- Контейнер для продуктів (для JS) -->
-                <div class="grid" id="product-grid"></div>
-            </div>
-        </section>
-
-
-        <!-- Категорії -->
-        <section class="category">
-            <div class="container">
-                <h2 class="category__title title">Категорії</h2>
-                <div class="category__products" id="category-list">
-                    <!-- карточки будуть додаватися через JS -->
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- Модальні вікна -->
+    <!-- Кошик -->
     <div id="cart-modal" class="modal">
         <div class="modal-content">
             <span class="close-btn">&times;</span>
@@ -147,6 +94,7 @@
         </div>
     </div>
 
+    <!-- Авторизація -->
     <div id="auth-modal" class="modal">
         <div class="modal-content">
             <span class="close-btn">&times;</span>
@@ -166,8 +114,8 @@
             <p>© 2025 MyDesignFurniture. Всі права захищено.</p>
         </div>
     </footer>
-
     <script src="script.js"></script>
+    <script src="category.js"></script>
 </body>
 
 </html>
