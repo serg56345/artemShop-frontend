@@ -30,6 +30,15 @@ p {
     padding: 0 15px;
 }
 
+section {
+    margin-bottom: 60px;
+}
+
+hr {
+    height: 2px;
+    background-color: #fff;
+}
+
 /* --- Header --- */
 .site-header {
     background: #111;

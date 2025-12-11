@@ -43,32 +43,7 @@ const API_BASE = "https://artemshop-backend.onrender.com/api";
 
 
 // ---------------- НАВІГАЦІЯ ---------------- //
-//document.querySelectorAll(".nav-link").forEach(link => {
-//link.addEventListener("click", (e) => {
-//e.preventDefault();
-//document.querySelectorAll(".nav-link").forEach(l => l.classList.remove("active"));
-//link.classList.add("active");
 
-//const section = link.dataset.section;
-//if (section === "catalog") showCatalog();
-//else if (section === "blog") loadBlog();
-//else if (section === "home") location.reload();
-//});
-//});
-//document.querySelectorAll(".nav-link").forEach(link => {
-//link.addEventListener("click", (e) => {
-//const section = link.dataset.section;
-//if (section === "catalog") {
-// e.preventDefault();
-//showCatalog(); // перехід на category.html
-//} else if (section === "blog") {
-//e.preventDefault();
-//loadBlog();
-//}
-// інші посилання, які ведуть на інші сторінки, залишаються звичайними
-//});
-//});
-// script.js — обробка кліків по меню
 document.querySelectorAll(".nav-link").forEach(link => {
   link.addEventListener("click", (e) => {
     const section = link.dataset.section;
@@ -93,23 +68,7 @@ menuToggle.addEventListener('click', () => {
 });
 
 // ---------------- КАТАЛОГ ---------------- //
-//function showCatalog() {
-//catalogSection.style.display = "block";
-//productGrid.innerHTML = "<p>Виберіть категорію меблів 👇</p>";
 
-// document.querySelectorAll(".btn-cat").forEach(btn => {
-//btn.addEventListener("click", async () => {
-//const file = btn.dataset.file;
-//try {
-// const res = await fetch(`data/${file}`);
-//const data = await res.json();
-// renderProducts(data);
-//} catch {
-//  productGrid.innerHTML = "<p>❌ Помилка завантаження каталогу</p>";
-// }
-// });
-// });
-//}
 function showCatalog() {
   window.location.href = "category.html";
 }
@@ -163,7 +122,6 @@ async function loadCategoryCards() {
 }
 
 loadCategoryCards();
-
 
 //-------Картки-------//
 async function loadProducts() {
