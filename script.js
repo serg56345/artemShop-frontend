@@ -128,7 +128,7 @@ async function loadProducts() {
   const response = await fetch('data/products.json');
   const products = await response.json();
 
-  const container = document.getElementById('product-list');
+  const container = document.getElementById('product-grid');
   container.innerHTML = "";
 
   products.forEach(product => {
