@@ -122,6 +122,78 @@ async function loadCategoryCards() {
 }
 
 loadCategoryCards();
+//-------Відгуки-------//
+function initReviewsSlider() {
+  let reviews = [];
+  let currentIndex = 0;
+
+  const track = document.querySelector('.slider-track');
+  const prevBtn = document.getElementById('reviews-prev');
+  const nextBtn = document.getElementById('reviews-next');
+  const container = document.querySelector('.slider-container');
+
+  fetch('./data/reviews.json')
+    .then(res => res.json())
+    .then(data => {
+      reviews = data;
+      renderReviews();
+      updateSlider();
+      window.addEventListener('resize', updateSlider);
+    });
+
+  function renderReviews() {
+    track.innerHTML = '';
+    reviews.forEach(review => {
+      const div = document.createElement('div');
+      div.className = 'review';
+      div.innerHTML = `
+        <img src="${review.image}" alt="${review.name}" />
+        <div class="review-text">
+          <h3>${review.name}</h3>
+          <p>${review.text}</p>
+          <div class="review-rating">${'⭐'.repeat(review.rating)}</div>
+        </div>
+      `;
+      track.appendChild(div);
+    });
+  }
+
+  function getVisibleCount() {
+    const width = window.innerWidth;
+    if (width <= 768) return 1;
+    if (width <= 1024) return 2;
+    return 4;
+  }
+
+  function updateSlider() {
+    const gap = parseInt(getComputedStyle(track).gap) || 0;
+    const visibleCount = getVisibleCount();
+    const containerWidth = container.offsetWidth;
+    const slideWidth = (containerWidth - gap * (visibleCount - 1)) / visibleCount;
+
+    document.querySelectorAll('.review').forEach(slide => {
+      slide.style.flex = `0 0 ${slideWidth}px`;
+    });
+
+    const maxIndex = Math.max(0, reviews.length - visibleCount);
+    if (currentIndex > maxIndex) currentIndex = maxIndex;
+    if (currentIndex < 0) currentIndex = 0;
+
+    track.style.transform = `translateX(-${currentIndex * (slideWidth + gap)}px)`;
+  }
+
+  nextBtn.addEventListener('click', () => {
+    currentIndex++;
+    updateSlider();
+  });
+
+  prevBtn.addEventListener('click', () => {
+    currentIndex--;
+    updateSlider();
+  });
+}
+
+document.addEventListener('DOMContentLoaded', initReviewsSlider);
 
 //-------Картки-------//
 async function loadProducts() {

@@ -1,0 +1,56 @@
+[
+    {
+        "name": "Іван",
+        "text": "Дуже класний сервіс!",
+        "rating": 5,
+        "image": "images/screen/screen2.PNG"
+    },
+    {
+        "name": "Олена",
+        "text": "Швидка доставка, рекомендую.",
+        "rating": 4,
+        "image": "images/screen/screen3.PNG"
+    },
+    {
+        "name": "Андрій",
+        "text": "Все сподобалось, буду замовляти ще.",
+        "rating": 5,
+        "image": "images/screen/screen4.PNG"
+    },
+    {
+        "name": "Іван",
+        "text": "Дуже класний сервіс!",
+        "rating": 5,
+        "image": "images/screen/screen5.PNG"
+    },
+    {
+        "name": "Олена",
+        "text": "Швидка доставка, рекомендую.",
+        "rating": 4,
+        "image": "images/screen/screen6.PNG"
+    },
+    {
+        "name": "Андрій",
+        "text": "Все сподобалось, буду замовляти ще.",
+        "rating": 5,
+        "image": "images/screen/screen7.PNG"
+    },
+    {
+        "name": "Іван",
+        "text": "Дуже класний сервіс!",
+        "rating": 5,
+        "image": "images/screen/screen8.PNG"
+    },
+    {
+        "name": "Олена",
+        "text": "Швидка доставка, рекомендую.",
+        "rating": 4,
+        "image": "images/screen/screen9.PNG"
+    },
+    {
+        "name": "Андрій",
+        "text": "Все сподобалось, буду замовляти ще.",
+        "rating": 5,
+        "image": "images/screen/screen10.PNG"
+    }
+]
