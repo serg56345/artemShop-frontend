@@ -1,5 +1,5 @@
 // ---------------- СЛАЙДЕР ---------------- //
-let slideIndex = 0;
+/*let slideIndex = 0;
 const slidesContainer = document.querySelector(".slides");
 const slides = document.querySelectorAll(".slide");
 const prevBtn = document.querySelector(".prev");
@@ -16,7 +16,105 @@ if (prevBtn && nextBtn) {
   prevBtn.addEventListener("click", () => showSlide(slideIndex - 1));
   nextBtn.addEventListener("click", () => showSlide(slideIndex + 1));
   setInterval(() => showSlide(slideIndex + 1), 5000);
+}*/
+// ---------------- ДАНІ І РЕНДЕР СЛАЙДІВ ---------------- //
+let slidesData = [];
+const slidesContainer = document.querySelector(".slides");
+const prevBtn = document.querySelector(".prev");
+const nextBtn = document.querySelector(".next");
+let slideIndex = 0;
+let slides = [];
+let autoSlideInterval;
+
+function renderSlides() {
+  if (!slidesContainer || slidesData.length === 0) return;
+
+  slidesContainer.innerHTML = ''; // очищаємо контейнер
+
+  // Для безшовного циклу дублюємо перший і останній слайд
+  const totalSlides = [...slidesData];
+  totalSlides.unshift(slidesData[slidesData.length - 1]); // клон останнього спереду
+  totalSlides.push(slidesData[0]); // клон першого ззаду
+
+  totalSlides.forEach((slide, index) => {
+    const slideDiv = document.createElement('div');
+    slideDiv.classList.add('slide');
+    slideDiv.innerHTML = `
+            <img src="${slide.image}" alt="${slide.title}">
+            <div class="slide-caption">
+                <h2>${slide.title}</h2>
+                <p>${slide.text}</p>
+            </div>
+        `;
+    slidesContainer.appendChild(slideDiv);
+  });
+
+  slides = document.querySelectorAll(".slide");
+  slidesContainer.style.transition = 'none';
+  slideIndex = 1; // стартуємо на справжньому першому слайді
+  slidesContainer.style.transform = `translateX(-${slideIndex * 100}%)`;
+  setTimeout(() => slidesContainer.style.transition = 'transform 0.5s ease-in-out');
 }
+
+function showSlide(index) {
+  if (slides.length === 0) return;
+
+  slideIndex = index;
+  slidesContainer.style.transform = `translateX(-${slideIndex * 100}%)`;
+
+  // Після завершення переходу перевіряємо клоновані слайди
+  slidesContainer.addEventListener('transitionend', handleTransitionEnd);
+}
+
+function handleTransitionEnd() {
+  slidesContainer.removeEventListener('transitionend', handleTransitionEnd);
+
+  // Якщо ми на клоні останнього слайду спереду
+  if (slideIndex === 0) {
+    slidesContainer.style.transition = 'none';
+    slideIndex = slidesData.length;
+    slidesContainer.style.transform = `translateX(-${slideIndex * 100}%)`;
+    setTimeout(() => slidesContainer.style.transition = 'transform 0.5s ease-in-out');
+  }
+
+  // Якщо ми на клоні першого слайду ззаду
+  if (slideIndex === slides.length - 1) {
+    slidesContainer.style.transition = 'none';
+    slideIndex = 1;
+    slidesContainer.style.transform = `translateX(-${slideIndex * 100}%)`;
+    setTimeout(() => slidesContainer.style.transition = 'transform 0.5s ease-in-out');
+  }
+}
+
+function initSlider() {
+  if (prevBtn && nextBtn) {
+    prevBtn.addEventListener("click", () => {
+      showSlide(slideIndex - 1);
+      resetAutoSlide();
+    });
+    nextBtn.addEventListener("click", () => {
+      showSlide(slideIndex + 1);
+      resetAutoSlide();
+    });
+  }
+
+  autoSlideInterval = setInterval(() => showSlide(slideIndex + 1), 5000);
+}
+
+function resetAutoSlide() {
+  clearInterval(autoSlideInterval);
+  autoSlideInterval = setInterval(() => showSlide(slideIndex + 1), 5000);
+}
+
+// Завантаження JSON
+fetch('data/slides.json')
+  .then(response => response.json())
+  .then(data => {
+    slidesData = data;
+    renderSlides();
+    initSlider();
+  })
+  .catch(error => console.error('Помилка завантаження JSON:', error));
 
 
 // ---------------- ГЛОБАЛЬНІ ЗМІННІ ---------------- //
@@ -122,10 +220,10 @@ async function loadCategoryCards() {
 }
 
 loadCategoryCards();
-//-------Відгуки-------//
 function initReviewsSlider() {
   let reviews = [];
-  let currentIndex = 0;
+  let currentIndex = 1; // стартуємо на першому справжньому слайді після клону
+  let visibleCount = 1;
 
   const track = document.querySelector('.slider-track');
   const prevBtn = document.getElementById('reviews-prev');
@@ -137,25 +235,34 @@ function initReviewsSlider() {
     .then(data => {
       reviews = data;
       renderReviews();
-      updateSlider();
-      window.addEventListener('resize', updateSlider);
+      updateSlider(false);
+      window.addEventListener('resize', () => updateSlider(false));
     });
 
   function renderReviews() {
     track.innerHTML = '';
-    reviews.forEach(review => {
+
+    // Створюємо клон останніх і перших елементів для безшовної каруселі
+    const clonesBefore = reviews.slice(-4); // можна регулювати, залежно від max visibleCount
+    const clonesAfter = reviews.slice(0, 4);
+
+    clonesBefore.forEach(review => appendSlide(review));
+    reviews.forEach(review => appendSlide(review));
+    clonesAfter.forEach(review => appendSlide(review));
+
+    function appendSlide(review) {
       const div = document.createElement('div');
       div.className = 'review';
       div.innerHTML = `
-        <img src="${review.image}" alt="${review.name}" />
-        <div class="review-text">
-          <h3>${review.name}</h3>
-          <p>${review.text}</p>
-          <div class="review-rating">${'⭐'.repeat(review.rating)}</div>
-        </div>
-      `;
+              <img src="${review.image}" alt="${review.name}" />
+              <div class="review-text">
+                  <h3>${review.name}</h3>
+                  <p>${review.text}</p>
+                  <div class="review-rating">${'⭐'.repeat(review.rating)}</div>
+              </div>
+          `;
       track.appendChild(div);
-    });
+    }
   }
 
   function getVisibleCount() {
@@ -165,9 +272,9 @@ function initReviewsSlider() {
     return 4;
   }
 
-  function updateSlider() {
+  function updateSlider(animate = true) {
+    visibleCount = getVisibleCount();
     const gap = parseInt(getComputedStyle(track).gap) || 0;
-    const visibleCount = getVisibleCount();
     const containerWidth = container.offsetWidth;
     const slideWidth = (containerWidth - gap * (visibleCount - 1)) / visibleCount;
 
@@ -175,22 +282,52 @@ function initReviewsSlider() {
       slide.style.flex = `0 0 ${slideWidth}px`;
     });
 
-    const maxIndex = Math.max(0, reviews.length - visibleCount);
-    if (currentIndex > maxIndex) currentIndex = maxIndex;
-    if (currentIndex < 0) currentIndex = 0;
+    if (!animate) {
+      track.style.transition = 'none';
+    } else {
+      track.style.transition = 'transform 0.8s ease-in-out'; // плавніший перехід
+    }
 
     track.style.transform = `translateX(-${currentIndex * (slideWidth + gap)}px)`;
   }
 
-  nextBtn.addEventListener('click', () => {
+  function nextSlide() {
     currentIndex++;
     updateSlider();
-  });
+    track.addEventListener('transitionend', handleTransitionEnd);
+  }
 
-  prevBtn.addEventListener('click', () => {
+  function prevSlide() {
     currentIndex--;
     updateSlider();
-  });
+    track.addEventListener('transitionend', handleTransitionEnd);
+  }
+
+  function handleTransitionEnd() {
+    track.removeEventListener('transitionend', handleTransitionEnd);
+
+    const totalSlides = reviews.length;
+
+    // Якщо на клоні ззаду
+    if (currentIndex >= totalSlides + 1) {
+      currentIndex = 1;
+      updateSlider(false);
+    }
+
+    // Якщо на клоні спереду
+    if (currentIndex <= 0) {
+      currentIndex = totalSlides;
+      updateSlider(false);
+    }
+  }
+
+  prevBtn.addEventListener('click', prevSlide);
+  nextBtn.addEventListener('click', nextSlide);
+
+  // Автопрокрутка (можна включити при потребі)
+  let autoSlide = setInterval(nextSlide, 6000);
+  container.addEventListener('mouseenter', () => clearInterval(autoSlide));
+  container.addEventListener('mouseleave', () => autoSlide = setInterval(nextSlide, 6000));
 }
 
 document.addEventListener('DOMContentLoaded', initReviewsSlider);
