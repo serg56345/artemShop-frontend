@@ -353,6 +353,40 @@ async function loadProducts() {
 }
 
 loadProducts();
+//------Як ми працюємо-----//
+document.addEventListener("DOMContentLoaded", () => {
+  loadHowWeWork();
+});
+
+async function loadHowWeWork() {
+  try {
+    const response = await fetch("data/how-we-work.json");
+    const data = await response.json();
+
+    const list = document.getElementById("howWeWorkList");
+    list.innerHTML = "";
+
+    data.forEach(item => {
+      const stepItem = document.createElement("div");
+      stepItem.className = "how-we-work__item";
+
+      stepItem.innerHTML = `
+        <div class="how-we-work__image">
+          <img src="${item.image}" alt="${item.title}">
+          <span class="how-we-work__step">${item.step}</span>
+        </div>
+
+        <h3 class="how-we-work__title">${item.title}</h3>
+        <p class="how-we-work__text">${item.text}</p>
+      `;
+
+      list.appendChild(stepItem);
+    });
+
+  } catch (error) {
+    console.error("Помилка завантаження how-we-work:", error);
+  }
+}
 
 
 // ---------------- КОШИК ---------------- //

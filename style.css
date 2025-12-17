@@ -13,7 +13,7 @@ body {
 
 body {
     font-family: 'Segoe UI', Arial, sans-serif;
-    background-color: #252526;
+    background-color: #8e8e8f;
     color: #fff;
     line-height: 1.5;
 }
@@ -169,6 +169,81 @@ hr {
 .next {
     right: 20px;
 }
+
+/* ===== Як ми працюємо ===== */
+
+
+
+.how-we-work .section-title {
+    text-align: center;
+    margin-bottom: 50px;
+
+}
+
+.how-we-work__list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+
+}
+
+.how-we-work__item {
+    text-align: left;
+}
+
+.how-we-work__image {
+    position: relative;
+    margin-bottom: 20px;
+
+}
+
+.how-we-work__image img {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.how-we-work__step {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    font-family: "Inter Tight", sans-serif;
+    font-weight: 500;
+    color: #1F1F1F;
+    font-size: 120px;
+    margin: 0;
+    z-index: 1;
+    padding-bottom: 10px;
+    transform: translateY(22px);
+
+}
+
+.how-we-work__title {
+    font-size: 20px;
+
+}
+
+.how-we-work__text {
+    font-size: 15px;
+    line-height: 1.5;
+    color: #f3ebeb;
+}
+
+/* ===== Адаптив ===== */
+
+@media (max-width: 992px) {
+    .how-we-work__list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+    .how-we-work__list {
+        grid-template-columns: 1fr;
+    }
+}
+
 
 /* --- Футер --- */
 .site-footer {

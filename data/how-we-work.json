@@ -1,0 +1,26 @@
+[
+    {
+        "step": "01",
+        "image": "images/screen/screen4.PNG",
+        "title": "Заявка",
+        "text": "Ви залишаєте заявку на сайті або телефонуєте нам"
+    },
+    {
+        "step": "02",
+        "image": "images/screen/screen5.PNG",
+        "title": "Консультація",
+        "text": "Ми уточнюємо деталі та підбираємо рішення"
+    },
+    {
+        "step": "03",
+        "image": "images/screen/screen6.PNG",
+        "title": "Робота",
+        "text": "Виконуємо роботу згідно домовленостей"
+    },
+    {
+        "step": "04",
+        "image": "images/screen/screen7.PNG",
+        "title": "Результат",
+        "text": "Ви отримуєте готовий результат"
+    }
+]
