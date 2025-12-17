@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MyFurniture</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
 </head>
 
 <body>
@@ -33,19 +34,13 @@
 
     <!-- Основний контент -->
     <main id="content">
-
-        <!-- Герой-секція -->
-        <section class="hero">
-            <div class="container">
-                <div class="slider">
-                    <div class="slides">
-                        <!-- Слайди будуть згенеровані динамічно через JS -->
-                    </div>
-                    <button class="prev">&#10094;</button>
-                    <button class="next">&#10095;</button>
-                </div>
+        <!--Виконані замовлення-->
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper" id="swiper-wrapper">
+                <!-- Сюди ми динамічно підвантажимо слайди з JSON -->
             </div>
-        </section>
+        </div>
+
 
         <hr>
         <!-- Секція замовлень -->
@@ -101,6 +96,13 @@
                 </div>
             </div>
         </section>
+        <!--Виконані замовлення-->
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper" id="swiper-wrapper">
+                <!-- Сюди ми динамічно підвантажимо слайди з JSON -->
+            </div>
+
+        </div>
 
 
     </main>
@@ -156,7 +158,7 @@
             <p>© 2025 MyDesignFurniture. Всі права захищено.</p>
         </div>
     </footer>
-
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <script src="script.js"></script>
 </body>
 

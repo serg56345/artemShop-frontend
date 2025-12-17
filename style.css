@@ -16,7 +16,11 @@ body {
     background-color: #8e8e8f;
     color: #fff;
     line-height: 1.5;
+
+
 }
+
+
 
 label,
 p {
@@ -91,91 +95,93 @@ hr {
     color: white;
 }
 
-/* --- Слайдер --- */
-.slider {
-    position: relative;
-    overflow: hidden;
+/* Контейнер Swiper */
+/* Слайдер по центру */
+.swiper {
     width: 100%;
     max-width: 1200px;
-    height: 70vh;
-    margin: auto;
-    border-radius: 30px;
+    margin: 0 auto;
+
 }
 
-.slides {
-    display: flex;
-    transition: transform 0.8s ease;
-    width: 100%;
-}
-
-.slide {
-    min-width: 100%;
+/* Слайд */
+.swiper-slide {
     position: relative;
+    width: 100%;
+    height: 400px;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background-color: #f7f7f7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.slide img {
+/* Контейнер для картинки */
+.slide-image-container {
+    width: 100%;
+    /* ширина блоку картинки */
+    width: 100%;
+    height: 70vh;
+    object-fit: cover;
+    display: block;
+    /* висота блоку картинки */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    /* картинка не виходить за межі */
+    border-radius: 24px;
+}
+
+/* Картинка */
+.slide-image-container img {
     width: 100%;
     height: 70vh;
     object-fit: cover;
     display: block;
 }
 
-.slide-caption {
+/* Текст у напівпрозорій рамці */
+.slide-text {
     position: absolute;
-    bottom: 15%;
-    left: 10%;
-    color: #fff;
-    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
-    background-color: rgba(0, 0, 0, 0.4);
-    padding: 15px 25px;
-    border-radius: 10px;
-}
-
-.slide-caption h2 {
-    font-size: 2.5rem;
-    margin-bottom: 10px;
-}
-
-.slide-caption p {
-    font-size: 1.2rem;
-}
-
-/* Кнопки слайдера */
-.prev,
-.next {
-    position: absolute;
-    top: 50%;
+    left: 30%;
+    top: 80%;
     transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.5);
-    color: #fff;
-    border: none;
-    font-size: 2rem;
-    padding: 10px 15px;
-    cursor: pointer;
-    border-radius: 50%;
-    z-index: 10;
-    transition: background 0.3s;
+    background-color: rgba(35, 35, 35, 0.5);
+    /*color: #fff;*/
+    padding: 2px 30px;
+    border-radius: 50px;
+    max-width: 100%;
+    text-align: center;
 }
 
-.prev:hover,
-.next:hover {
-    background: rgba(0, 0, 0, 0.8);
+.slide-text,
+.slide-text p {
+    color: white;
 }
 
-.prev {
-    left: 20px;
+/* Заголовок і текст */
+.slide-text h3 {
+    margin: 0 20px 5px 0;
+    font-size: 40px;
+
 }
 
-.next {
-    right: 20px;
+.slide-text p {
+
+    line-height: 1.4;
+    font-size: 30px;
 }
+
 
 /* ===== Як ми працюємо ===== */
 
 
 
 .how-we-work .section-title {
-    text-align: center;
+    text-align: left;
     margin-bottom: 50px;
 
 }
@@ -221,6 +227,7 @@ hr {
 
 .how-we-work__title {
     font-size: 20px;
+    text-align: left;
 
 }
 
@@ -246,28 +253,80 @@ hr {
 
 
 /* --- Футер --- */
+/* Загальний стиль футера */
 .site-footer {
-    background: #111;
-    color: #aaa;
+    background-color: #000;
+    /* Можна змінити на будь-який фон */
+    color: #fff;
+    /* Білий текст */
     text-align: center;
-    padding: 30px 0;
-    margin-top: 50px;
+    /* Центрування тексту */
+    padding: 40px 20px;
+    /* Відступи зверху/знизу і по боках */
+    font-family: Arial, sans-serif;
 }
 
+/* Контейнер футера */
+.site-footer .container {
+    max-width: 1200px;
+    /* Обмежує ширину на великих екранах */
+    margin: 0 auto;
+    /* Центрує контейнер */
+}
+
+.site-footer p {
+    color: white;
+    /* чорний текст на чорному фоні */
+}
+
+/* Посилання */
 .site-footer a {
     color: #fff;
+    /* Білий колір посилань */
     text-decoration: none;
+    transition: color 0.3s;
 }
 
-.site-footer .socials a {
-    color: #aaa;
-    text-decoration: none;
-    transition: 0.3s;
+.site-footer a:hover {
+    color: #f0a500;
+    /* Колір при наведенні, можна змінити */
 }
 
-.site-footer .socials a:hover {
-    color: #fff;
+/* Соціальні мережі */
+.site-footer .socials {
+    margin: 15px 0;
+    font-size: 16px;
 }
+
+/* Адаптивність для мобільних */
+@media (max-width: 768px) {
+    .site-footer {
+        padding: 30px 10px;
+        font-size: 14px;
+    }
+
+    .site-footer .socials {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .site-footer {
+        padding: 20px 5px;
+        font-size: 13px;
+    }
+
+    .site-footer .socials {
+        display: block;
+        margin: 10px 0;
+    }
+
+    .site-footer .socials a {
+        display: inline-block;
+        margin: 0 5px;
+    }
+}
+
 
 /* --- Категорії --- */
 .category__products {
@@ -370,6 +429,7 @@ hr {
 
 .reviews-slider {
     max-width: 1200px;
+
     margin: 0 auto;
     font-family: sans-serif;
 }
@@ -386,6 +446,7 @@ hr {
 
 .slider-track {
     display: flex;
+    justify-content: space-between;
     transition: transform 0.5s ease;
     gap: 10px;
 }
@@ -400,7 +461,7 @@ hr {
 
 .review img {
     width: 100%;
-    height: 400px;
+    height: 440px;
     /* стандартна висота для десктопа */
     display: block;
     object-fit: cover;

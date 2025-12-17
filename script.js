@@ -1,121 +1,43 @@
 // ---------------- СЛАЙДЕР ---------------- //
-/*let slideIndex = 0;
-const slidesContainer = document.querySelector(".slides");
-const slides = document.querySelectorAll(".slide");
-const prevBtn = document.querySelector(".prev");
-const nextBtn = document.querySelector(".next");
+async function loadSlides() {
+  try {
+    const response = await fetch("./data/slides.json");
+    const slidesData = await response.json();
 
-function showSlide(index) {
-  if (!slidesContainer) return;
-  const total = slides.length;
-  slideIndex = (index + total) % total;
-  slidesContainer.style.transform = `translateX(-${slideIndex * 100}%)`;
-}
+    const wrapper = document.getElementById("swiper-wrapper");
+    if (!wrapper) return; // на випадок, якщо контейнера нема
 
-if (prevBtn && nextBtn) {
-  prevBtn.addEventListener("click", () => showSlide(slideIndex - 1));
-  nextBtn.addEventListener("click", () => showSlide(slideIndex + 1));
-  setInterval(() => showSlide(slideIndex + 1), 5000);
-}*/
-// ---------------- ДАНІ І РЕНДЕР СЛАЙДІВ ---------------- //
-let slidesData = [];
-const slidesContainer = document.querySelector(".slides");
-const prevBtn = document.querySelector(".prev");
-const nextBtn = document.querySelector(".next");
-let slideIndex = 0;
-let slides = [];
-let autoSlideInterval;
-
-function renderSlides() {
-  if (!slidesContainer || slidesData.length === 0) return;
-
-  slidesContainer.innerHTML = ''; // очищаємо контейнер
-
-  // Для безшовного циклу дублюємо перший і останній слайд
-  const totalSlides = [...slidesData];
-  totalSlides.unshift(slidesData[slidesData.length - 1]); // клон останнього спереду
-  totalSlides.push(slidesData[0]); // клон першого ззаду
-
-  totalSlides.forEach((slide, index) => {
-    const slideDiv = document.createElement('div');
-    slideDiv.classList.add('slide');
-    slideDiv.innerHTML = `
-            <img src="${slide.image}" alt="${slide.title}">
-            <div class="slide-caption">
-                <h2>${slide.title}</h2>
-                <p>${slide.text}</p>
-            </div>
-        `;
-    slidesContainer.appendChild(slideDiv);
-  });
-
-  slides = document.querySelectorAll(".slide");
-  slidesContainer.style.transition = 'none';
-  slideIndex = 1; // стартуємо на справжньому першому слайді
-  slidesContainer.style.transform = `translateX(-${slideIndex * 100}%)`;
-  setTimeout(() => slidesContainer.style.transition = 'transform 0.5s ease-in-out');
-}
-
-function showSlide(index) {
-  if (slides.length === 0) return;
-
-  slideIndex = index;
-  slidesContainer.style.transform = `translateX(-${slideIndex * 100}%)`;
-
-  // Після завершення переходу перевіряємо клоновані слайди
-  slidesContainer.addEventListener('transitionend', handleTransitionEnd);
-}
-
-function handleTransitionEnd() {
-  slidesContainer.removeEventListener('transitionend', handleTransitionEnd);
-
-  // Якщо ми на клоні останнього слайду спереду
-  if (slideIndex === 0) {
-    slidesContainer.style.transition = 'none';
-    slideIndex = slidesData.length;
-    slidesContainer.style.transform = `translateX(-${slideIndex * 100}%)`;
-    setTimeout(() => slidesContainer.style.transition = 'transform 0.5s ease-in-out');
-  }
-
-  // Якщо ми на клоні першого слайду ззаду
-  if (slideIndex === slides.length - 1) {
-    slidesContainer.style.transition = 'none';
-    slideIndex = 1;
-    slidesContainer.style.transform = `translateX(-${slideIndex * 100}%)`;
-    setTimeout(() => slidesContainer.style.transition = 'transform 0.5s ease-in-out');
-  }
-}
-
-function initSlider() {
-  if (prevBtn && nextBtn) {
-    prevBtn.addEventListener("click", () => {
-      showSlide(slideIndex - 1);
-      resetAutoSlide();
+    slidesData.forEach(slide => {
+      const slideEl = document.createElement("div");
+      slideEl.classList.add("swiper-slide");
+      slideEl.innerHTML = `
+        <div class="slide-image-container">
+          <img src="${slide.image}" alt="${slide.title}">
+        </div>
+        <div class="slide-text">
+          <h3>${slide.title}</h3>
+          <p>${slide.text}</p>
+        </div>
+      `;
+      wrapper.appendChild(slideEl);
     });
-    nextBtn.addEventListener("click", () => {
-      showSlide(slideIndex + 1);
-      resetAutoSlide();
+
+    // Ініціалізація Swiper
+    new Swiper(".mySwiper", {
+      loop: true,                  // нескінченне гортання
+      speed: 600,                  // швидкість анімації
+      autoplay: { delay: 3000, disableOnInteraction: false }, // автопрокрутка
+      slidesPerView: 1,            // показуємо 1 слайд
+      spaceBetween: 0
     });
+
+  } catch (error) {
+    console.error("Помилка при завантаженні слайдів:", error);
   }
-
-  autoSlideInterval = setInterval(() => showSlide(slideIndex + 1), 5000);
 }
 
-function resetAutoSlide() {
-  clearInterval(autoSlideInterval);
-  autoSlideInterval = setInterval(() => showSlide(slideIndex + 1), 5000);
-}
-
-// Завантаження JSON
-fetch('data/slides.json')
-  .then(response => response.json())
-  .then(data => {
-    slidesData = data;
-    renderSlides();
-    initSlider();
-  })
-  .catch(error => console.error('Помилка завантаження JSON:', error));
-
+// Виклик функції лише один раз
+loadSlides();
 
 // ---------------- ГЛОБАЛЬНІ ЗМІННІ ---------------- //
 const catalogSection = document.getElementById("catalog-section");
