@@ -34,14 +34,16 @@
 
     <!-- Основний контент -->
     <main id="content">
-        <!--Виконані замовлення-->
-        <div class="swiper mySwiper">
-            <div class="swiper-wrapper" id="swiper-wrapper">
-                <!-- Сюди ми динамічно підвантажимо слайди з JSON -->
+        <!--Секція Hero-->
+        <section>
+            <div class="container">
+                <div class="swiper mySwiper">
+                    <div class="swiper-wrapper" id="swiper-wrapper">
+                        <!-- Сюди ми динамічно підвантажимо слайди з JSON -->
+                    </div>
+                </div>
             </div>
-        </div>
-
-
+        </section>
         <hr>
         <!-- Секція замовлень -->
         <section class="orders" id="orders-section">
@@ -59,8 +61,6 @@
                 <div class="grid" id="product-grid"></div>
             </div>
         </section>
-
-
         <!-- Категорії -->
         <section class="category">
             <div class="container">
@@ -96,17 +96,21 @@
                 </div>
             </div>
         </section>
-        <!--Виконані замовлення-->
-        <div class="swiper mySwiper">
-            <div class="swiper-wrapper" id="swiper-wrapper">
-                <!-- Сюди ми динамічно підвантажимо слайди з JSON -->
+        <!-- Секція Другий Swiper -->
+        <hr>
+        <section>
+            <div class="container">
+                <h2 class="section-title">Виконані замовлення</h2>
+                <div class="swiper secondSwiper">
+                    <div class="swiper-wrapper" id="second-swiper-wrapper">
+                        <!-- Сюди пізніше будемо вантажити слайди -->
+                    </div>
+                </div>
             </div>
 
-        </div>
-
-
+        </section>
     </main>
-    <hr>
+
     <!-- Модальні вікна -->
     <div id="cart-modal" class="modal">
         <div class="modal-content">

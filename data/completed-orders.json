@@ -1,0 +1,47 @@
+[
+    {
+        "image": "images/orders/order1.jpg",
+        "title": "Кухня на замовлення",
+        "text": "м. Київ, масив Оболонь"
+    },
+    {
+        "image": "images/orders/order2.jpg",
+        "title": "Диван у вітальню",
+        "text": "м. Львів, приватний будинок"
+    },
+    {
+        "image": "images/orders/order3.jpg",
+        "title": "Спальня під ключ",
+        "text": "м. Дніпро, ЖК Comfort"
+    },
+    {
+        "image": "images/orders/order4.jpg",
+        "title": "Кухня на замовлення",
+        "text": "м. Київ, масив Оболонь"
+    },
+    {
+        "image": "images/orders/order5.jpg",
+        "title": "Диван у вітальню",
+        "text": "м. Львів, приватний будинок"
+    },
+    {
+        "image": "images/orders/order6.jpg",
+        "title": "Спальня під ключ",
+        "text": "м. Дніпро, ЖК Comfort"
+    },
+    {
+        "image": "images/orders/order7.jpg",
+        "title": "Кухня на замовлення",
+        "text": "м. Київ, масив Оболонь"
+    },
+    {
+        "image": "images/orders/order8.jpg",
+        "title": "Диван у вітальню",
+        "text": "м. Львів, приватний будинок"
+    },
+    {
+        "image": "images/orders/order9.jpg",
+        "title": "Спальня під ключ",
+        "text": "м. Дніпро, ЖК Comfort"
+    }
+]

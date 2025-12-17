@@ -1,3 +1,25 @@
+// ---------------- ГЛОБАЛЬНІ ЗМІННІ ---------------- //
+const catalogSection = document.getElementById("catalog-section");
+const productGrid = document.getElementById("product-grid");
+const cartBtn = document.getElementById("cart-btn");
+const cartModal = document.getElementById("cart-modal");
+const authModal = document.getElementById("auth-modal");
+const authContent = document.getElementById("auth-content");
+const closeBtns = document.querySelectorAll(".close-btn");
+const checkoutBtn = document.getElementById("checkout-btn");
+const registerBtn = document.getElementById("register-btn");
+const loginBtn = document.getElementById("login-btn");
+const logoutBtn = document.getElementById("logout-btn");
+
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let user = JSON.parse(sessionStorage.getItem("user")) || null;
+
+updateCartCount();
+updateAuthButtons();
+
+// ---------------- БАЗОВИЙ URL API ---------------- //
+const API_BASE = "https://artemshop-backend.onrender.com/api";
+
 // ---------------- СЛАЙДЕР ---------------- //
 async function loadSlides() {
   try {
@@ -39,27 +61,57 @@ async function loadSlides() {
 // Виклик функції лише один раз
 loadSlides();
 
-// ---------------- ГЛОБАЛЬНІ ЗМІННІ ---------------- //
-const catalogSection = document.getElementById("catalog-section");
-const productGrid = document.getElementById("product-grid");
-const cartBtn = document.getElementById("cart-btn");
-const cartModal = document.getElementById("cart-modal");
-const authModal = document.getElementById("auth-modal");
-const authContent = document.getElementById("auth-content");
-const closeBtns = document.querySelectorAll(".close-btn");
-const checkoutBtn = document.getElementById("checkout-btn");
-const registerBtn = document.getElementById("register-btn");
-const loginBtn = document.getElementById("login-btn");
-const logoutBtn = document.getElementById("logout-btn");
+// ---------------- ВИКОНАНІ ЗАМОВЛЕННЯ (SLIDER) ---------------- //
+async function loadCompletedOrders() {
+  try {
+    const response = await fetch("./data/completed-orders.json");
+    const ordersData = await response.json();
 
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
-let user = JSON.parse(sessionStorage.getItem("user")) || null;
+    const wrapper = document.getElementById("second-swiper-wrapper");
+    if (!wrapper) return;
 
-updateCartCount();
-updateAuthButtons();
+    ordersData.forEach(item => {
+      const slideEl = document.createElement("div");
+      slideEl.classList.add("swiper-slide");
+      slideEl.innerHTML = `
+        <div class="slide-image-container">
+          <img src="${item.image}" alt="${item.title}">
+        </div>
+        <div class="slide-text">
+          <h3>${item.title}</h3>
+          <p>${item.text}</p>
+        </div>
+      `;
+      wrapper.appendChild(slideEl);
+    });
 
-// ---------------- БАЗОВИЙ URL API ---------------- //
-const API_BASE = "https://artemshop-backend.onrender.com/api";
+    // ❗ ОКРЕМИЙ Swiper з навігацією
+    new Swiper(".secondSwiper", {
+      loop: true,
+      speed: 600,
+      slidesPerView: 2,
+      spaceBetween: 20,
+      autoplay: {
+        delay: 4000,
+        disableOnInteraction: false
+      },
+      navigation: {
+        nextEl: ".completed-next",
+        prevEl: ".completed-prev"
+      },
+      breakpoints: {
+        0: { slidesPerView: 1 },
+        768: { slidesPerView: 2 }
+      }
+    });
+
+  } catch (error) {
+    console.error("Помилка завантаження виконаних замовлень:", error);
+  }
+}
+
+// запуск
+loadCompletedOrders();
 
 
 // ---------------- НАВІГАЦІЯ ---------------- //
@@ -163,7 +215,6 @@ function initReviewsSlider() {
 
   function renderReviews() {
     track.innerHTML = '';
-
     // Створюємо клон останніх і перших елементів для безшовної каруселі
     const clonesBefore = reviews.slice(-4); // можна регулювати, залежно від max visibleCount
     const clonesAfter = reviews.slice(0, 4);
@@ -249,7 +300,7 @@ function initReviewsSlider() {
   // Автопрокрутка (можна включити при потребі)
   let autoSlide = setInterval(nextSlide, 6000);
   container.addEventListener('mouseenter', () => clearInterval(autoSlide));
-  container.addEventListener('mouseleave', () => autoSlide = setInterval(nextSlide, 6000));
+  container.addEventListener('mouseleave', () => autoSlide = setInterval(nextSlide, 3000));
 }
 
 document.addEventListener('DOMContentLoaded', initReviewsSlider);
@@ -309,7 +360,6 @@ async function loadHowWeWork() {
     console.error("Помилка завантаження how-we-work:", error);
   }
 }
-
 
 // ---------------- КОШИК ---------------- //
 cartBtn.addEventListener("click", () => {
@@ -558,7 +608,6 @@ function updateAuthButtons() {
     logoutBtn.style.display = "none";
   }
 }
-
 
 function loadBlog() {
   catalogSection.style.display = "none";
