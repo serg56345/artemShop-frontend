@@ -231,7 +231,7 @@ function initReviewsSlider() {
               <div class="review-text">
                   <h3>${review.name}</h3>
                   <p>${review.text}</p>
-                  <div class="review-rating">${'⭐'.repeat(review.rating)}</div>
+                  <div class="review-rating">${'★'.repeat(review.rating)}</div>
               </div>
           `;
       track.appendChild(div);
@@ -475,8 +475,8 @@ checkoutBtn.addEventListener("click", () => {
       const data = await res.json();
       if (!res.ok) throw new Error(data.message || "Помилка");
 
-      msg.textContent = "✅ Замовлення успішно оформлено!";
-      msg.style.color = "green";
+      msg.textContent = "✓ Замовлення успішно оформлено!";
+      msg.style.color = "#333";
 
       cart = [];
       saveCart();

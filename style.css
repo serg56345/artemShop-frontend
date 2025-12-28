@@ -770,7 +770,7 @@ button#reviews-next:hover {
 }
 
 .remove-btn {
-    background: #c00;
+    background: #88888b;
     color: #fff;
     border: none;
     padding: 6px 10px;
@@ -779,7 +779,7 @@ button#reviews-next:hover {
 }
 
 .remove-btn:hover {
-    background: #900;
+    background: #333;
 }
 
 /* --- Адаптивність Header --- */
@@ -843,4 +843,9 @@ button#reviews-next:hover {
         grid-template-columns: 1fr;
         gap: 15px;
     }
+}
+
+.review-rating {
+    color: #333;
+    font-size: 30px;
 }
