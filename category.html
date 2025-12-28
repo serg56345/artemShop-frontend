@@ -9,85 +9,87 @@
 </head>
 
 <body>
-    <!-- Шапка -->
-    <header class="site-header">
-        <div class="container header-inner">
-            <h1 class="logo">MyFurniture</h1>
-            <!-- Гамбургер для мобільних -->
-            <span class="menu-toggle">☰</span>
+    <div class="wrapper">
+        <!-- Шапка -->
+        <header class="site-header">
+            <div class="container header-inner">
+                <h1 class="logo">MyFurniture</h1>
+                <!-- Гамбургер для мобільних -->
+                <span class="menu-toggle">☰</span>
 
-            <!-- Навігація -->
-            <nav class="main-nav">
-                <ul>
-                    <li><a href="index.html" class="nav-link">Головна</a></li>
-                    <li><a href="#" class="nav-link" data-section="catalog">Каталог</a></li>
-                    <li><a href="#" class="nav-link" data-section="blog">Блог</a></li>
-                    <li><a href="#" id="register-btn">Реєстрація</a></li>
-                    <li><a href="#" id="login-btn">Увійти</a></li>
-                    <li><a href="#" id="logout-btn" style="display:none;">Вийти</a></li>
-                    <li><a href="#" id="cart-btn">🛒 Кошик (<span id="cart-count">0</span>)</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+                <!-- Навігація -->
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="index.html" class="nav-link">Головна</a></li>
+                        <li><a href="#" class="nav-link" data-section="catalog">Каталог</a></li>
+                        <li><a href="#" class="nav-link" data-section="blog">Блог</a></li>
+                        <li><a href="#" id="register-btn">Реєстрація</a></li>
+                        <li><a href="#" id="login-btn">Увійти</a></li>
+                        <li><a href="#" id="logout-btn" style="display:none;">Вийти</a></li>
+                        <li><a href="#" id="cart-btn">🛒 Кошик (<span id="cart-count">0</span>)</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
 
-    <section class="category-products">
-        <div class="container flex-container">
-            <!-- Сайдбар -->
-            <aside class="sidebar">
-                <h3>Категорії</h3>
-                <ul id="sidebar-categories">
-                    <!-- Категорії будуть додані через JS -->
-                </ul>
-            </aside>
+        <section class="category-products">
+            <div class="container flex-container">
+                <!-- Сайдбар -->
+                <aside class="sidebar">
+                    <h3>Категорії</h3>
+                    <ul id="sidebar-categories">
+                        <!-- Категорії будуть додані через JS -->
+                    </ul>
+                </aside>
 
-            <!-- Основний блок карток -->
-            <div class="products-area">
-                <h2 id="category-title" class="title">Товари</h2>
-                <div id="product-list" class="product-list">
-                    <!-- Картки товарів -->
+                <!-- Основний блок карток -->
+                <div class="products-area">
+                    <h2 id="category-title" class="title">Товари</h2>
+                    <div id="product-list" class="product-list">
+                        <!-- Картки товарів -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Кошик -->
+        <div id="cart-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-btn">&times;</span>
+                <h2>Ваш кошик</h2>
+                <div id="cart-items"></div>
+                <div class="cart-total">
+                    <p>Загальна сума: ₴<span id="cart-total">0</span></p>
+                    <button id="checkout-btn" class="btn">Оформити замовлення</button>
+                </div>
+                <div id="checkout-form" style="display:none; margin-top:15px;">
+                    <h3>Оформлення замовлення</h3>
+                    <form id="order-form">
+                        <label>Номер телефону:<br>
+                            <input type="tel" name="phone" placeholder="+380XXXXXXXXX" required>
+                        </label><br>
+                        <label>Відділення Нової пошти:<br>
+                            <input type="text" name="np" placeholder="№ відділення або адреса" required>
+                        </label><br>
+                        <label>Оплата:<br>
+                            <select name="payment" required>
+                                <option value="cod">При отриманні</option>
+                                <option value="online">Онлайн</option>
+                            </select>
+                        </label><br><br>
+                        <button type="submit" class="btn">Підтвердити замовлення</button>
+                    </form>
+                    <p id="order-msg"></p>
                 </div>
             </div>
         </div>
-    </section>
 
-    <!-- Кошик -->
-    <div id="cart-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn">&times;</span>
-            <h2>Ваш кошик</h2>
-            <div id="cart-items"></div>
-            <div class="cart-total">
-                <p>Загальна сума: ₴<span id="cart-total">0</span></p>
-                <button id="checkout-btn" class="btn">Оформити замовлення</button>
+        <!-- Авторизація -->
+        <div id="auth-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-btn">&times;</span>
+                <div id="auth-content"></div>
             </div>
-            <div id="checkout-form" style="display:none; margin-top:15px;">
-                <h3>Оформлення замовлення</h3>
-                <form id="order-form">
-                    <label>Номер телефону:<br>
-                        <input type="tel" name="phone" placeholder="+380XXXXXXXXX" required>
-                    </label><br>
-                    <label>Відділення Нової пошти:<br>
-                        <input type="text" name="np" placeholder="№ відділення або адреса" required>
-                    </label><br>
-                    <label>Оплата:<br>
-                        <select name="payment" required>
-                            <option value="cod">При отриманні</option>
-                            <option value="online">Онлайн</option>
-                        </select>
-                    </label><br><br>
-                    <button type="submit" class="btn">Підтвердити замовлення</button>
-                </form>
-                <p id="order-msg"></p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Авторизація -->
-    <div id="auth-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn">&times;</span>
-            <div id="auth-content"></div>
         </div>
     </div>
 

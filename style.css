@@ -4,22 +4,28 @@
     padding: 0;
     box-sizing: border-box;
 }
+
 html,
 body {
+    height: 100%;
+    margin: 0;
     overflow-x: hidden;
-    /* запобігає горизонтальному скролу */
+}
+
+.wrapper {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 body {
     font-family: 'Segoe UI', Arial, sans-serif;
-    background-color: #8e8e8f;
+    background-color: #c2c2c4;
     color: #fff;
     line-height: 1.5;
 
 
 }
-
-
 
 label,
 p {
@@ -46,7 +52,7 @@ hr {
 
 /* --- Header --- */
 .site-header {
-    background: #111;
+    background: #333;
     color: #fff;
     padding: 15px 0;
     position: sticky;
@@ -120,17 +126,14 @@ hr {
 /* Контейнер для картинки */
 .slide-image-container {
     width: 100%;
-    /* ширина блоку картинки */
     width: 100%;
     height: 70vh;
     object-fit: cover;
     display: block;
-    /* висота блоку картинки */
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    /* картинка не виходить за межі */
     border-radius: 24px;
 }
 
@@ -149,7 +152,6 @@ hr {
     top: 80%;
     transform: translateY(-50%);
     background-color: rgba(35, 35, 35, 0.5);
-    /*color: #fff;*/
     padding: 2px 30px;
     border-radius: 50px;
     max-width: 100%;
@@ -233,7 +235,7 @@ hr {
 }
 
 /*=====Виконані замовлення======*/
-/* Секція Виконані замовлення */
+
 .secondSwiper {
     width: 100%;
     padding: 20px 0;
@@ -245,34 +247,28 @@ hr {
     align-items: center;
     text-align: center;
     background: #fff;
-    /* білий фон для слайда */
     border-radius: 24px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     height: 400px;
-    /* <-- зменшена висота слайда */
 }
 
 .secondSwiper .slide-image-container {
     width: 100%;
     height: 100%;
-    /* картинка займає 60% висоти слайда */
     overflow: hidden;
 }
 
 .secondSwiper .slide-image-container img {
     width: 100%;
     height: 100%;
-    /* заповнює контейнер повністю */
     object-fit: cover;
-    /* обрізає зайве, зберігаючи пропорції */
     display: block;
 }
 
 .secondSwiper .slide-text {
     padding: 20px;
     height: 10%;
-    /* текст займає решту слайда */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -293,7 +289,6 @@ hr {
     .secondSwiper .swiper-slide {
         width: 90%;
         height: 280px;
-        /* трохи більша висота на мобільних */
     }
 }
 
@@ -311,43 +306,33 @@ hr {
 }
 
 /* --- Футер --- */
-/* Загальний стиль футера */
-.site-footer {
-    background-color: #000;
-    /* Можна змінити на будь-який фон */
-    color: #fff;
-    /* Білий текст */
+footer {
+    background: #333;
+    color: white;
     text-align: center;
-    /* Центрування тексту */
-    padding: 40px 20px;
-    /* Відступи зверху/знизу і по боках */
+    padding: 20px;
     font-family: Arial, sans-serif;
 }
 
 /* Контейнер футера */
 .site-footer .container {
     max-width: 1200px;
-    /* Обмежує ширину на великих екранах */
     margin: 0 auto;
-    /* Центрує контейнер */
 }
 
 .site-footer p {
     color: white;
-    /* чорний текст на чорному фоні */
 }
 
 /* Посилання */
 .site-footer a {
     color: #fff;
-    /* Білий колір посилань */
     text-decoration: none;
     transition: color 0.3s;
 }
 
 .site-footer a:hover {
-    color: #f0a500;
-    /* Колір при наведенні, можна змінити */
+    color: #88888b;
 }
 
 /* Соціальні мережі */
@@ -499,7 +484,6 @@ hr {
 .slider-container {
     position: relative;
     overflow: hidden;
-    /* прибрано padding, тепер слайди йдуть від краю до краю */
 }
 
 .slider-track {
@@ -510,7 +494,6 @@ hr {
 
 .review {
     flex: 0 0 auto;
-    /* ширина задається JS */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -519,7 +502,6 @@ hr {
 .review img {
     width: 100%;
     height: 440px;
-    /* стандартна висота для десктопа */
     display: block;
     object-fit: cover;
     border-radius: 10px;
@@ -543,7 +525,7 @@ hr {
 }
 
 .review-rating {
-    color: #f39c12;
+    color: #88888b;
     font-size: 16px;
     margin-top: 5px;
 }
@@ -659,7 +641,7 @@ button#reviews-next:hover {
 }
 
 .sidebar li a:hover {
-    color: #007bff;
+    color: #88888b;
 }
 
 .products-area {
@@ -702,7 +684,7 @@ button#reviews-next:hover {
 
 .product-card .price {
     font-weight: bold;
-    color: #007bff;
+    color: #88888b;
 }
 
 .product-card .add-to-cart {
@@ -710,14 +692,14 @@ button#reviews-next:hover {
     padding: 8px 12px;
     border: none;
     border-radius: 6px;
-    background: #007bff;
+    background: #88888b;
     color: #fff;
     cursor: pointer;
     transition: background 0.2s;
 }
 
 .product-card .add-to-cart:hover {
-    background: #0056b3;
+    background: #333;
 }
 
 @media (max-width: 1024px) {
@@ -850,18 +832,15 @@ button#reviews-next:hover {
 @media (max-width: 780px) {
     .flex-container {
         flex-direction: column;
-        /* блоки один під одним */
         gap: 0;
     }
 
     .sidebar {
         display: none;
-        /* ховаємо сайдбар */
     }
 
     .product-list {
         grid-template-columns: 1fr;
-        /* одна картка на ряд */
         gap: 15px;
     }
 }
