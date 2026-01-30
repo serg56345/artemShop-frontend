@@ -556,8 +556,8 @@ function openLoginModal(message = "") {
   authModal.style.display = "block";
   authContent.innerHTML = `
     <h2>Вхід</h2>
-    ${message ? `<p>${message}</p>` : ""}
     <form id="login-form">
+      <label>Ім'я: <input type="text" name="name" required></label>
       <label>Email: <input type="email" name="email" required></label>
       <label>Пароль: <input type="password" name="password" required></label>
       <button type="submit" class="btn">Увійти</button>
