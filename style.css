@@ -145,35 +145,67 @@ hr {
     display: block;
 }
 
+/* ОБОВʼЯЗКОВО */
+.swiper-slide {
+    position: relative;
+}
+
 /* Текст у напівпрозорій рамці */
 .slide-text {
     position: absolute;
-    left: 30%;
-    top: 80%;
-    transform: translateY(-50%);
-    background-color: rgba(35, 35, 35, 0.5);
-    padding: 2px 30px;
-    border-radius: 50px;
-    max-width: 100%;
+    left: 50%;
+    bottom: 10%;
+    transform: translateX(-50%);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    /* текст починається зверху всередині блоку */
+
+    background-color: rgba(35, 35, 35, 0.6);
+
+    /* Висота блоку і падінги для відстані тексту від країв */
+    min-height: 80px;
+    /* трохи менше */
+    padding: 20px 20px;
+    /* помірні відступи зверху/знизу */
+
+    border-radius: 24px;
+
+    width: 90%;
+    max-width: 900px;
+
+    box-sizing: border-box;
     text-align: center;
+    z-index: 10;
 }
 
-.slide-text,
-.slide-text p {
-    color: white;
-}
-
-/* Заголовок і текст */
+/* Заголовок */
 .slide-text h3 {
-    margin: 0 20px 5px 0;
-    font-size: 40px;
-
+    margin: 0;
+    font-size: clamp(18px, 4vw, 40px);
+    line-height: 1.25;
 }
 
+/* Абзац */
 .slide-text p {
+    margin: 0;
+    font-size: clamp(14px, 3vw, 26px);
+    line-height: 1.5;
+    color: #fff;
+}
 
-    line-height: 1.4;
-    font-size: 30px;
+/* Мобільні екрани */
+@media (max-width: 420px) {
+    .slide-text {
+        padding: 10px 10px;
+        /* мінімальні падінги */
+        background-color: transparent;
+        /* фон зникає */
+        min-height: auto;
+        /* прибираємо мінімальну висоту */
+        bottom: 6%;
+    }
 }
 
 /* ===== Як ми працюємо ===== */
@@ -212,8 +244,8 @@ hr {
     bottom: 0;
     left: 0;
     font-family: "Inter Tight", sans-serif;
-    font-weight: 500;
-    color: #1F1F1F;
+    font-weight: 550;
+    color: #ece2e2;
     font-size: 120px;
     margin: 0;
     z-index: 1;
@@ -437,6 +469,25 @@ footer {
     white-space: nowrap;
 }
 
+@media (max-width: 540px) {
+    .category__content {
+        flex-direction: column;
+        gap: 1px;
+        padding: 8px 12px;
+        white-space: normal;
+        width: 100%;
+        left: 0;
+        transform: none;
+        bottom: 0;
+        border-radius: 10px;
+        box-sizing: border-box;
+        background: rgba(45, 45, 45, 0.1);
+        text-align: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+}
+
+
 .category__content span {
     font-weight: bold;
 }
@@ -464,6 +515,7 @@ footer {
 .category-card__text {
     font-size: 16px;
     margin-bottom: 15px;
+    color: #fff;
 }
 
 .category-card__text span {
@@ -525,7 +577,7 @@ footer {
 }
 
 .review-rating {
-    color: #88888b;
+    color: #f2f2f4;
     font-size: 16px;
     margin-top: 5px;
 }
@@ -846,6 +898,6 @@ button#reviews-next:hover {
 }
 
 .review-rating {
-    color: #333;
+    color: #f4f0f0;
     font-size: 30px;
 }
