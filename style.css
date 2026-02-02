@@ -23,13 +23,17 @@ body {
     background-color: #444446;
     color: #fff;
     line-height: 1.5;
-
-
 }
 
 label,
 p {
-    color: black;
+    color: #fff;
+}
+
+img {
+    width: 100%;
+    object-fit: cover;
+    display: block;
 }
 
 .container {
@@ -126,10 +130,7 @@ hr {
 /* Контейнер для картинки */
 .slide-image-container {
     width: 100%;
-    width: 100%;
     height: 70vh;
-    object-fit: cover;
-    display: block;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -139,15 +140,7 @@ hr {
 
 /* Картинка */
 .slide-image-container img {
-    width: 100%;
     height: 70vh;
-    object-fit: cover;
-    display: block;
-}
-
-/* ОБОВʼЯЗКОВО */
-.swiper-slide {
-    position: relative;
 }
 
 /* Текст у напівпрозорій рамці */
@@ -156,25 +149,15 @@ hr {
     left: 50%;
     bottom: 10%;
     transform: translateX(-50%);
-
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    /* текст починається зверху всередині блоку */
-
     background-color: rgba(35, 35, 35, 0.6);
-
-    /* Висота блоку і падінги для відстані тексту від країв */
     min-height: 80px;
-    /* трохи менше */
     padding: 20px 20px;
-    /* помірні відступи зверху/знизу */
-
     border-radius: 24px;
-
     width: 90%;
     max-width: 900px;
-
     box-sizing: border-box;
     text-align: center;
     z-index: 10;
@@ -192,18 +175,15 @@ hr {
     margin: 0;
     font-size: clamp(14px, 3vw, 26px);
     line-height: 1.5;
-    color: #fff;
+
 }
 
 /* Мобільні екрани */
 @media (max-width: 420px) {
     .slide-text {
         padding: 10px 10px;
-        /* мінімальні падінги */
         background-color: transparent;
-        /* фон зникає */
         min-height: auto;
-        /* прибираємо мінімальну висоту */
         bottom: 6%;
     }
 }
@@ -233,9 +213,7 @@ hr {
 }
 
 .how-we-work__image img {
-    width: 100%;
     height: 320px;
-    object-fit: cover;
     border-radius: 12px;
 }
 
@@ -292,10 +270,7 @@ hr {
 }
 
 .secondSwiper .slide-image-container img {
-    width: 100%;
     height: 100%;
-    object-fit: cover;
-    display: block;
 }
 
 .secondSwiper .slide-text {
@@ -313,7 +288,6 @@ hr {
 
 .secondSwiper .slide-text p {
     font-size: 14px;
-    color: white;
 }
 
 /* Адаптивність */
@@ -352,9 +326,7 @@ footer {
     margin: 0 auto;
 }
 
-.site-footer p {
-    color: white;
-}
+
 
 /* Посилання */
 .site-footer a {
@@ -427,11 +399,8 @@ footer {
 }
 
 .category__picture img {
-    width: 100%;
     height: 100%;
-    object-fit: cover;
     transition: transform 0.5s ease;
-    display: block;
 }
 
 .category__picture::after {
@@ -552,10 +521,7 @@ footer {
 }
 
 .review img {
-    width: 100%;
     height: 440px;
-    display: block;
-    object-fit: cover;
     border-radius: 10px;
 }
 
@@ -573,13 +539,13 @@ footer {
 .review p {
     margin: 5px 0 0;
     font-size: 14px;
-    color: white;
 }
 
 .review-rating {
-    color: #f2f2f4;
-    font-size: 16px;
+
     margin-top: 5px;
+    color: #f4f0f0;
+    font-size: 30px;
 }
 
 /* Кнопки завжди поверх слайдів */
@@ -619,9 +585,7 @@ button#reviews-next:hover {
 /* Адаптивність для мобільних */
 @media (max-width: 768px) {
     .review img {
-        width: 100%;
         height: auto;
-        object-fit: cover;
     }
 
     button#reviews-prev,
@@ -720,9 +684,7 @@ button#reviews-next:hover {
 }
 
 .product-card img {
-    width: 100%;
     border-radius: 6px;
-    object-fit: cover;
 }
 
 .product-card h3 {
@@ -813,7 +775,6 @@ button#reviews-next:hover {
     width: 60px;
     height: 60px;
     border-radius: 4px;
-    object-fit: cover;
     margin-right: 10px;
 }
 
@@ -895,9 +856,4 @@ button#reviews-next:hover {
         grid-template-columns: 1fr;
         gap: 15px;
     }
-}
-
-.review-rating {
-    color: #f4f0f0;
-    font-size: 30px;
 }
