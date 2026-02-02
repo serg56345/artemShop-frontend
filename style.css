@@ -23,6 +23,7 @@ body {
     background-color: #444446;
     color: #fff;
     line-height: 1.5;
+
 }
 
 label,
@@ -664,6 +665,13 @@ button#reviews-next:hover {
     flex: 1;
 }
 
+@media (max-width: 780px) {
+    .products-area {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
 .product-list {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -849,7 +857,7 @@ button#reviews-next:hover {
     }
 
     .sidebar {
-        display: none;
+        margin: 0 auto;
     }
 
     .product-list {

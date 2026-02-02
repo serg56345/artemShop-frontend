@@ -20,10 +20,10 @@ async function loadProducts() {
         const container = document.getElementById('product-list');
         container.innerHTML = "";
 
-        if (filtered.length === 0) {
-            container.innerHTML = "<p>Товари цієї категорії відсутні.</p>";
-            return;
-        }
+        //if (filtered.length === 0) {
+           // container.innerHTML = "<p>Товари цієї категорії відсутні.</p>";
+           // return;
+        //}
 
         // Створюємо картки і додаємо обробник addToCart
         filtered.forEach(product => {
