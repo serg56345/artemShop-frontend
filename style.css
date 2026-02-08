@@ -765,6 +765,12 @@ button#reviews-next:hover {
     position: relative;
 }
 
+.modal-content h2,
+h4,
+p {
+    color: #000;
+}
+
 .close-btn {
     position: absolute;
     right: 15px;

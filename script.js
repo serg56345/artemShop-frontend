@@ -409,7 +409,7 @@ function updateCartView() {
       const div = document.createElement("div");
       div.classList.add("cart-item");
       div.innerHTML = `
-        <img src="images/${item.img}" alt="${item.name}">
+        <img src="${item.img}" alt="${item.name}">
         <div>
         <h4>${item.name}</h4>
         <p>₴${item.price} × ${item.qty}</p>
