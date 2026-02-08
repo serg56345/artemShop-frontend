@@ -698,10 +698,12 @@ button#reviews-next:hover {
 .product-card h3 {
     margin: 10px 0 5px;
     font-size: 18px;
+    color: #000;
 }
 
 .product-card p {
     margin: 5px 0;
+    color: #000;
 }
 
 .product-card .price {
@@ -768,6 +770,7 @@ button#reviews-next:hover {
     right: 15px;
     top: 10px;
     font-size: 24px;
+    color: #000;
     cursor: pointer;
 }
 
@@ -792,7 +795,7 @@ button#reviews-next:hover {
 
 .remove-btn {
     background: #88888b;
-    color: #fff;
+    color: #000;
     border: none;
     padding: 6px 10px;
     border-radius: 4px;

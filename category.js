@@ -21,8 +21,8 @@ async function loadProducts() {
         container.innerHTML = "";
 
         //if (filtered.length === 0) {
-           // container.innerHTML = "<p>Товари цієї категорії відсутні.</p>";
-           // return;
+        // container.innerHTML = "<p>Товари цієї категорії відсутні.</p>";
+        // return;
         //}
 
         // Створюємо картки і додаємо обробник addToCart
@@ -38,6 +38,7 @@ async function loadProducts() {
                     data-id="${product.id}"
                     data-name="${product.title}"
                     data-price="${product.price}"
+                    data-price="${product.description}"
                     data-img="${product.img}">
                     В корзину
                 </button>

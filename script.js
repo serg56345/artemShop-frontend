@@ -362,6 +362,7 @@ async function loadHowWeWork() {
 }
 
 // ---------------- КОШИК ---------------- //
+
 cartBtn.addEventListener("click", () => {
   updateCartView();
   cartModal.style.display = "block";
@@ -409,7 +410,10 @@ function updateCartView() {
       div.classList.add("cart-item");
       div.innerHTML = `
         <img src="images/${item.img}" alt="${item.name}">
-        <div><h4>${item.name}</h4><p>₴${item.price} × ${item.qty}</p></div>
+        <div>
+        <h4>${item.name}</h4>
+        <p>₴${item.price} × ${item.qty}</p>
+        </div>
         <button class="remove-btn" data-id="${item.id}">✖</button>
       `;
       cartItemsContainer.appendChild(div);
