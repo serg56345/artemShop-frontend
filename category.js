@@ -40,7 +40,7 @@ async function loadProducts() {
                     data-price="${product.price}"
                     data-price="${product.description}"
                     data-img="${product.img}">
-                    В корзину
+                    Додати в кошик
                 </button>
             `;
             container.appendChild(card);
