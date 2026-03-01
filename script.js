@@ -616,7 +616,7 @@ function updateAuthButtons() {
 // ----- Функції коментарів глобально -----
 async function loadComments(postId) {
   try {
-    const res = await fetch(`http://localhost:5000/api/comments/${postId}`);
+    const res = await fetch(`https://artemshop-backend.onrender.com/${postId}`);
     const comments = await res.json();
     const container = document.getElementById(`comments-${postId}`);
     container.innerHTML = comments.length
@@ -632,7 +632,7 @@ async function addComment(postId) {
   if (!text) return;
 
   try {
-    await fetch("http://localhost:5000/api/comments", {
+    await fetch("https://artemshop-backend.onrender.com", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ post_id: postId, user_id: 1, text }) // user_id = 1 для тесту
