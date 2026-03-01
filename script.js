@@ -10,6 +10,8 @@ const checkoutBtn = document.getElementById("checkout-btn");
 const registerBtn = document.getElementById("register-btn");
 const loginBtn = document.getElementById("login-btn");
 const logoutBtn = document.getElementById("logout-btn");
+const API_URL = "https://artemshop-backend.onrender.com";
+
 
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 let user = JSON.parse(sessionStorage.getItem("user")) || null;
@@ -616,82 +618,43 @@ function updateAuthButtons() {
 // ----- Функції коментарів глобально -----
 async function loadComments(postId) {
   try {
-    const res = await fetch(`http://localhost:5000/api/comments/${postId}`);
+    const res = await fetch(`${API_URL}/api/comments/${postId}`);
     const comments = await res.json();
+
     const container = document.getElementById(`comments-${postId}`);
+
     container.innerHTML = comments.length
-      ? comments.map(c => `<p><strong>${c.name || 'Гість'}:</strong> ${c.text}</p>`).join('')
+      ? comments.map(c =>
+        `<p><strong>${c.name || 'Гість'}:</strong> ${c.text}</p>`
+      ).join('')
       : "<p>Коментарів поки що немає</p>";
+
   } catch (err) {
     console.error("Помилка завантаження коментарів:", err);
   }
 }
-
 async function addComment(postId) {
-  const text = document.getElementById(`comment-text-${postId}`).value.trim();
+  const text = document
+    .getElementById(`comment-text-${postId}`)
+    .value.trim();
+
   if (!text) return;
 
   try {
-    await fetch("http://localhost:5000/api/comments", {
+    await fetch(`${API_URL}/api/comments`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ post_id: postId, user_id: 1, text }) // user_id = 1 для тесту
+      body: JSON.stringify({
+        post_id: postId,
+        user_id: 54, // тимчасово тестовий id
+        text
+      })
     });
 
     document.getElementById(`comment-text-${postId}`).value = "";
     loadComments(postId);
+
   } catch (err) {
     console.error("Помилка додавання коментаря:", err);
-  }
-}
-
-// ----- Функція завантаження блогу -----
-async function loadBlog() {
-  catalogSection.style.display = "none";
-  const content = document.getElementById("content");
-
-  content.innerHTML = `
-    <section class="blog">
-      <div class="container">
-        <h2>Наш блог</h2>
-        <div class="blog-posts" id="blog-posts">
-          <p>Завантаження...</p>
-        </div>
-      </div>
-    </section>
-  `;
-
-  try {
-    const response = await fetch("https://artemshop-backend.onrender.com/api/posts");
-    const posts = await response.json();
-
-    const postsContainer = document.getElementById("blog-posts");
-    postsContainer.innerHTML = "";
-
-    if (posts.length === 0) {
-      postsContainer.innerHTML = "<p>Поки що немає постів</p>";
-      return;
-    }
-
-    posts.forEach(post => {
-      postsContainer.innerHTML += `
-        <article class="blog-post">
-          <h3>${post.title}</h3>
-          <p>${post.content}</p>
-          <small>🕒 ${new Date(post.created_at).toLocaleDateString()}</small>
-
-          <div class="comments" id="comments-${post.id}" style="margin-top:10px; margin-bottom:5px;"></div>
-          <input type="text" id="comment-text-${post.id}" placeholder="Ваш коментар" style="width:80%; padding:5px; margin-bottom:5px;">
-          <button onclick="addComment(${post.id})" style="padding:5px 10px;">Додати коментар</button>
-        </article>
-      `;
-
-      // Підвантажуємо коментарі після вставки поста
-      loadComments(post.id);
-    });
-
-  } catch (error) {
-    console.error("Помилка завантаження блогу:", error);
-    document.getElementById("blog-posts").innerHTML = "<p>Помилка завантаження блогу</p>";
   }
 }
