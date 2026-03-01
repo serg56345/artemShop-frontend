@@ -11,8 +11,6 @@ const registerBtn = document.getElementById("register-btn");
 const loginBtn = document.getElementById("login-btn");
 const logoutBtn = document.getElementById("logout-btn");
 
-
-
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 let user = JSON.parse(sessionStorage.getItem("user")) || null;
 
