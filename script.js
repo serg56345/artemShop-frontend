@@ -514,9 +514,9 @@ function openRegisterModal() {
   authContent.innerHTML = `
     <h2>Реєстрація</h2>
     <form id="register-form">
-      <label>Ім'я: <input type="text" name="name" required></label>
-      <label>Email: <input type="email" name="email" required></label>
-      <label>Пароль: <input type="password" name="password" required minlength="6"></label>
+      <label> <input type="text" name="name" placeholder="Введіть своє ім'я" required></label>
+      <label> <input type="email" name="email" placeholder="Введіть електронну адресу" required></label>
+      <label> <input type="password" name="password"  placeholder="Введіть пароль" required minlength="6"></label>
       <button type="submit" class="btn">Зареєструватися</button>
     </form>
     <p id="auth-msg"></p>
@@ -561,9 +561,9 @@ function openLoginModal(message = "") {
   authContent.innerHTML = `
     <h2>Вхід</h2>
     <form id="login-form">
-      <label>Ім'я: <input type="text" name="name" required></label>
-      <label>Email: <input type="email" name="email" required></label>
-      <label>Пароль: <input type="password" name="password" required></label>
+      <label> <input type="text" name="name"  placeholder="Ім'я" required></label>
+      <label> <input type="email" name="email"  placeholder="Email" required></label>
+      <label> <input type="password" name="password"   placeholder="Password" required></label>
       <button type="submit" class="btn">Увійти</button>
     </form>
     <p id="auth-msg"></p>
@@ -613,19 +613,85 @@ function updateAuthButtons() {
   }
 }
 
-function loadBlog() {
+// ----- Функції коментарів глобально -----
+async function loadComments(postId) {
+  try {
+    const res = await fetch(`http://localhost:5000/api/comments/${postId}`);
+    const comments = await res.json();
+    const container = document.getElementById(`comments-${postId}`);
+    container.innerHTML = comments.length
+      ? comments.map(c => `<p><strong>${c.name || 'Гість'}:</strong> ${c.text}</p>`).join('')
+      : "<p>Коментарів поки що немає</p>";
+  } catch (err) {
+    console.error("Помилка завантаження коментарів:", err);
+  }
+}
+
+async function addComment(postId) {
+  const text = document.getElementById(`comment-text-${postId}`).value.trim();
+  if (!text) return;
+
+  try {
+    await fetch("http://localhost:5000/api/comments", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ post_id: postId, user_id: 1, text }) // user_id = 1 для тесту
+    });
+
+    document.getElementById(`comment-text-${postId}`).value = "";
+    loadComments(postId);
+  } catch (err) {
+    console.error("Помилка додавання коментаря:", err);
+  }
+}
+
+// ----- Функція завантаження блогу -----
+async function loadBlog() {
   catalogSection.style.display = "none";
   const content = document.getElementById("content");
+
   content.innerHTML = `
     <section class="blog">
       <div class="container">
         <h2>Наш блог</h2>
-        <div class="blog-posts">
-          <article><h3>Новинка меблів 2025</h3><p>Опис статті...</p></article>
-          <article><h3>Як обрати диван</h3><p>Корисні поради...</p></article>
-          <article><h3>Догляд за меблями</h3><p>Поради щодо збереження меблів...</p></article>
+        <div class="blog-posts" id="blog-posts">
+          <p>Завантаження...</p>
         </div>
       </div>
     </section>
   `;
+
+  try {
+    const response = await fetch("http://localhost:5000/api/posts");
+    const posts = await response.json();
+
+    const postsContainer = document.getElementById("blog-posts");
+    postsContainer.innerHTML = "";
+
+    if (posts.length === 0) {
+      postsContainer.innerHTML = "<p>Поки що немає постів</p>";
+      return;
+    }
+
+    posts.forEach(post => {
+      postsContainer.innerHTML += `
+        <article class="blog-post">
+          <h3>${post.title}</h3>
+          <p>${post.content}</p>
+          <small>🕒 ${new Date(post.created_at).toLocaleDateString()}</small>
+
+          <div class="comments" id="comments-${post.id}" style="margin-top:10px; margin-bottom:5px;"></div>
+          <input type="text" id="comment-text-${post.id}" placeholder="Ваш коментар" style="width:80%; padding:5px; margin-bottom:5px;">
+          <button onclick="addComment(${post.id})" style="padding:5px 10px;">Додати коментар</button>
+        </article>
+      `;
+
+      // Підвантажуємо коментарі після вставки поста
+      loadComments(post.id);
+    });
+
+  } catch (error) {
+    console.error("Помилка завантаження блогу:", error);
+    document.getElementById("blog-posts").innerHTML = "<p>Помилка завантаження блогу</p>";
+  }
 }

@@ -756,7 +756,7 @@ button#reviews-next:hover {
 }
 
 .modal-content {
-    background: #fff;
+    background: rgba(35, 35, 35, 0.4);
     margin: 5% auto;
     padding: 20px;
     width: 90%;
@@ -768,7 +768,7 @@ button#reviews-next:hover {
 .modal-content h2,
 h4,
 p {
-    color: #000;
+    color: #fff;
 }
 
 .close-btn {
@@ -776,7 +776,7 @@ p {
     right: 15px;
     top: 10px;
     font-size: 24px;
-    color: #000;
+    color: #fff;
     cursor: pointer;
 }
 
@@ -873,4 +873,67 @@ p {
         grid-template-columns: 1fr;
         gap: 15px;
     }
+}
+
+/* Загальні стилі для форм */
+#register-form,
+#login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
+/* Загальні стилі для input */
+#register-form input,
+#login-form input {
+    width: 100%;
+    max-width: 400px;
+    background: #88888b;
+    padding: 12px;
+    cursor: pointer;
+    border-radius: 6px;
+    text-align: center;
+    box-sizing: border-box;
+    transition: background 0.2s;
+}
+
+#register-form input:hover,
+#login-form input:hover {
+    background: #333;
+}
+
+/* Стилі для placeholder */
+#register-form input::placeholder,
+#login-form input::placeholder {
+    text-align: center;
+    color: #fff;
+    opacity: 1;
+}
+
+/* Загальні стилі для button */
+#register-form button,
+#login-form button {
+    margin-top: 10px;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 6px;
+    background: #88888b;
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+/* Hover ефект для button */
+#register-form button:hover,
+#login-form button:hover {
+    background: #333;
+}
+
+#login-form input:not(:placeholder-shown),
+#register-form input:not(:placeholder-shown) {
+    background-color: #333;
+    /* змінюємо фон */
+    color: #fff;
+    /* змінюємо колір тексту */
 }
