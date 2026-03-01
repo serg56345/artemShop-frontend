@@ -662,7 +662,7 @@ async function loadBlog() {
   `;
 
   try {
-    const response = await fetch("http://localhost:5000/api/posts");
+    const response = await fetch("https://artemshop-backend.onrender.com/api/posts");
     const posts = await response.json();
 
     const postsContainer = document.getElementById("blog-posts");
